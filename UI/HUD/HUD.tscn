@@ -30,3 +30,4 @@ text = "Console"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="MarginContainer/Button" to="." method="open_console"]
