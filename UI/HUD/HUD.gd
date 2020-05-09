@@ -3,7 +3,7 @@ extends CanvasLayer
 func _ready():
 	$"Hacking GUI".visible = false
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("open_console"):
 		toggle_console()
 
