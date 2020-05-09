@@ -16,7 +16,6 @@ _global_script_class_icons={
 [application]
 
 config/name="CCC Jam"
-run/main_scene="res://World/Tutorial/Tutorial.tscn"
 config/icon="res://icon.png"
 
 [importer_defaults]
