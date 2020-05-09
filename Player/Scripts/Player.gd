@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var velocity = Vector2()
 var player_speed = 300 #max speed of the player
-var player_jump_speed = 10
+var player_jump_speed = 100
 var player_health = 100 #the health of the payer
 var can_walk = true #for checking if the player is mouving
 var can_jump = true #fir checking if the player is in a platform
