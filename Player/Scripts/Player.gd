@@ -1,12 +1,15 @@
 extends KinematicBody2D
 
 var velocity = Vector2()
-var player_speed = 300 #Max speed of the player
-var player_jump_speed = 200
-var player_health = 100 #The health of the payer
+var speed = 300
+var jump_speed = 200
+var health = 100
 var can_walk = true #For checking if the player is moving
 var jump_pressed = false
-var gravity = 500 #The gravity value
+var gravity = 500
+
+func _ready():
+	global.player = self
 
 func _physics_process(delta):
 	get_input()
@@ -21,7 +24,7 @@ func get_input():
 	if Input.is_action_pressed("move_left"):
 		input_velocity -= 1
 	
-	velocity.x = input_velocity * player_speed
+	velocity.x = input_velocity * speed
 	
 	jump_pressed = false
 	if Input.is_action_pressed("jump"):
@@ -33,7 +36,7 @@ func movement(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	if is_on_floor() and jump_pressed:
-		velocity.y -= player_jump_speed
+		velocity.y -= jump_speed
 
 func animate():
 	# TODO
