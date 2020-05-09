@@ -17,12 +17,11 @@ var usable_types = [
 ]
 
 var usable_player_variables = {
-	"speed" : funcref()
+	"speed" : 0
 }
 
 func _on_Console_command_entered(command):
 	parse_command(command)
-	is_a_valid
 
 func parse_command(text):
 	var separated_command = text.split(" ")

@@ -8,6 +8,11 @@ var can_walk = true #For checking if the player is moving
 var jump_pressed = false
 var gravity = 500
 
+var pressedTime = 0.2 #in seconds, anti input frustration value
+var coyoteTime= 0.2;#in seconds
+var coyoteTimer = 10
+var jumpPressedTimer=10
+
 func _ready():
 	global.player = self
 
@@ -32,11 +37,22 @@ func get_input():
 
 func movement(delta):
 	velocity.y += gravity * delta
-	
+	#please add an accel curve (i can do it if u ask) Jix
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	if is_on_floor() and jump_pressed:
 		velocity.y -= jump_speed
+	
+	if jump_pressed:
+		jumpPressedTimer=0
+	if is_on_floor():
+		coyoteTimer=0
+	if coyoteTimer<=coyoteTime and jumpPressedTimer<=pressedTime:
+		velocity.y -= jump_speed
+		jumpPressedTimer=1000
+		coyoteTimer=1000
+	jumpPressedTimer+=delta
+	coyoteTimer+=delta
 
 func animate():
 	# TODO
