@@ -15,7 +15,7 @@ func _on_Input_text_entered(new_text):
 	emit_signal("command_entered", new_text)
 
 func output_text(text, from_user):
-	output.bbcode_text = str(output.bbcode_text, "\n", "C:\\>" if from_user else "", text)
+	output.bbcode_text = str(output.bbcode_text, "\n", "[color=red]root@game[color=white]:[color=#33cfff]~[color=greenConsole]# " if from_user else "", text)
 
 func output_error(error):
-	output.bbcode_text = str(output.bbcode_text, "\n[color=red]", error, "[/color]")
+	output.bbcode_text = str(output.bbcode_text, "\n[color=greenConsole]", error, "[/color]")
