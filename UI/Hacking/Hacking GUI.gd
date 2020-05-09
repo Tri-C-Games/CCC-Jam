@@ -1,7 +1,7 @@
 extends Control
 
 onready var console = get_node("TabContainer/Player/MarginContainer/VBoxContainer/Console")
-
+onready var player = preload("res://Player/Scenes/Player.tscn").instance()
 var success_text = "The \"%s\" command has been used successfully."
 var error_text = "\'%s\' is not recognised as an internal or external command,\noperable program or batch file."
 
