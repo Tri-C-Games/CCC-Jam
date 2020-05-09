@@ -45,21 +45,21 @@ func parse_command(text):
 		console.output_error(not_recognised_text % type)
 		return
 	
-	match type:
-		"player":
-			var variable = separated_command[2].to_lower()
-			if not variable in usable_player_variables:
-				console.output_error(not_recognised_text % type)
-				return
-			
-			match variable:
-				"speed":
-					var result = separated_command[3]
-					if result.is_valid_integer():
-						global.player.speed = int(result)
-					else:
-						# TODO - Could be cool to add some sort of in game effect if the player inputs a string.
-						pass
+#	match type:
+#		"player":
+#			var variable = separated_command[2].to_lower()
+#			if not variable in usable_player_variables:
+#				console.output_error(not_recognised_text % type)
+#				return
+#
+#			match variable:
+#				"speed":
+#					var result = separated_command[3]
+#					if result.is_valid_integer():
+#						global.player.speed = int(result)
+#					else:
+#						# TODO - Could be cool to add some sort of in game effect if the player inputs a string.
+#						pass
 	
 	console.output_text(success_text % command, false)
 
