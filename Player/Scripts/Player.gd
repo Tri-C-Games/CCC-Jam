@@ -26,10 +26,6 @@ func get_input():
 	jump_pressed = false
 	if Input.is_action_pressed("jump"):
 		jump_pressed = true
-	
-	# UI
-	if Input.is_action_just_pressed("open console"):
-		$HUD.open_console()
 
 func movement(delta):
 	velocity.y += gravity * delta
