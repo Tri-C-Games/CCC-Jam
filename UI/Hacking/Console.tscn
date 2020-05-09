@@ -1,6 +1,16 @@
+<<<<<<< HEAD
 [gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://UI/Hacking/Console.gd" type="Script" id=1]
+=======
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/Hacking/Console.gd" type="Script" id=1]
+[ext_resource path="res://UI/Hacking/Console Theme.tres" type="Theme" id=2]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+>>>>>>> 8b633883c25328158e9e95ca2e8479cfb714b022
 
 [node name="Console" type="Control"]
 anchor_right = 1.0
@@ -11,26 +21,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-size_flags_vertical = 3
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Output" type="TextEdit" parent="VBoxContainer"]
-margin_right = 1024.0
-margin_bottom = 572.0
-focus_mode = 0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_vertical = 3
-text = "Console"
-readonly = true
-smooth_scrolling = true
-wrap_enabled = true
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Output" type="RichTextLabel" parent="VBoxContainer"]
+margin_right = 1024.0
+<<<<<<< HEAD
+margin_bottom = 572.0
+focus_mode = 0
+size_flags_vertical = 3
+=======
+margin_bottom = 581.0
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 0, 1, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "Console"
+>>>>>>> 8b633883c25328158e9e95ca2e8479cfb714b022
+text = "Console"
 
 [node name="Input" type="LineEdit" parent="VBoxContainer"]
 margin_top = 576.0
@@ -39,5 +61,4 @@ margin_bottom = 600.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="cursor_changed" from="VBoxContainer/Output" to="." method="_on_Output_cursor_changed"]
 [connection signal="text_entered" from="VBoxContainer/Input" to="." method="_on_Input_text_entered"]

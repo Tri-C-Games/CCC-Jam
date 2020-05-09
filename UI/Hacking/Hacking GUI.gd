@@ -16,6 +16,6 @@ func parse_command(text):
 	var separated_command = text.split(" ")
 	var command = separated_command[0].to_lower()
 	if (command in usable_commands):
-		console.print_console(success_text % command)
+		console.output_text(success_text % command, false)
 	else:
-		console.print_console(error_text % command)
+		console.output_error(error_text % command)
