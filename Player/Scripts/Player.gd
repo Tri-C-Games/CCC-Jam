@@ -1,26 +1,39 @@
 extends KinematicBody2D
 
 var velocity = Vector2()
-var player_speed = 300 #max speed of the player
-var player_jump_speed = 100
-var player_health = 100 #the health of the payer
-var can_walk = true #for checking if the player is mouving
-var can_jump = true #fir checking if the player is in a platform
-var gravity = 5 #the gravity value
+var player_speed = 300 #Max speed of the player
+var player_jump_speed = 200
+var player_health = 100 #The health of the payer
+var can_walk = true #For checking if the player is moving
+var jump_pressed = false
+var gravity = 500 #The gravity value
 
 func _physics_process(delta):
-	if Input.is_action_pressed("ui_right") and not Input.is_action_pressed("ui_left") and can_walk:
-		velocity.x =  player_speed
-	elif Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right") and can_walk:
-		velocity.x =  -player_speed
-	else:
-		velocity.x = 0
-	if Input.is_action_pressed("ui_up") and can_jump:
-		can_jump = false
-		velocity.y -= player_jump_speed
-	if is_on_floor():
-		can_jump = true
-	velocity.y += gravity
+	get_input()
+	movement(delta)
+	animate()
+
+func get_input():
+	var input_velocity = 0
+	if Input.is_action_pressed("move_right"):
+		input_velocity += 1
+	if Input.is_action_pressed("move_left"):
+		input_velocity -= 1
+	
+	velocity.x = input_velocity * player_speed
+	
+	jump_pressed = false
+	if Input.is_action_pressed("jump"):
+		jump_pressed = true
+
+func movement(delta):
+	velocity.y += gravity * delta
+	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	
+	if is_on_floor() and jump_pressed:
+		velocity.y -= player_jump_speed
+
+func animate():
+	# TODO
+	pass
