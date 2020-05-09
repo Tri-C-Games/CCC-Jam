@@ -15,10 +15,10 @@ var real_coyote_time
 
 func _physics_process(delta):
 	# TODO - Could be cool to add some sort of in game effect if the player inputs a string.
-	real_gravity = float(global.gravity) if global.gravity else 0
-	real_speed = float(global.player_speed) if global.player_speed.is_valid_integer() else 0
-	real_jump_speed = float(global.player_jump_speed) if global.player_jump_speed.is_valid_integer() else 0
-	real_coyote_time = float(global.player_coyote_time) if global.player_coyote_time.is_valid_integer() else 0
+	real_gravity = float(global.gravity) if global.gravity.is_valid_float else 0
+	real_speed = float(global.player_speed) if global.player_speed.is_valid_float() else 0
+	real_jump_speed = float(global.player_jump_speed) if global.player_jump_speed.is_valid_float() else 0
+	real_coyote_time = float(global.player_coyote_time) if global.player_coyote_time.is_valid_float() else 0
 	
 	get_input()
 	movement(delta)
