@@ -51,14 +51,14 @@ func parse_command(text):
 			
 			# Change the variable's value to the new value that the player chose.
 			var new_value = separated_command[2].to_lower()
-			global.set(variable, new_value)
+			global.get(variable).value=new_value
 			
 			console.output_text("[i]%s has been set to %s.[/i]" % [variable, new_value], false)
 		"get":
 			var variable = separated_command[1].to_lower()
 			
 			# Check if the variable actually exists.
-			var value = global.get(variable)
+			var value = global.get(variable.value)
 			if not value:
 				console.output_error(not_recognised_text % variable)
 				return
