@@ -1,7 +1,6 @@
 extends Control
 
 signal exit_pressed
-signal set_command_used
 
 onready var console = get_node("TabContainer/Player/MarginContainer/VBoxContainer/Console")
 var success_text = "The \"%s\" command has been used successfully."
