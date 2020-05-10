@@ -14,6 +14,7 @@ func start_dialogue(text):
 
 func _on_Increment_Visible_Characters_Timer_timeout():
 	rich_text_label.visible_characters += 1
+	get_parent().play_key_press_sfx()
 	var new_char = rich_text_label.text[rich_text_label.visible_characters - 1]
 	
 	if rich_text_label.visible_characters == rich_text_label.get_total_character_count():

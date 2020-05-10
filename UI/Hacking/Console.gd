@@ -20,5 +20,4 @@ func output_error(error):
 	output.bbcode_text = str(output.bbcode_text, "\n", error)
 
 func _on_Input_text_changed(_new_text):
-	# Typing SFX
-	$"Key Press SFX".play()
+	get_parent().get_parent().play_key_press_sfx()

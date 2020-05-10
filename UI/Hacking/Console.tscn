@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/Hacking/Console.gd" type="Script" id=1]
 [ext_resource path="res://UI/Hacking/Console Theme.tres" type="Theme" id=2]
 [ext_resource path="res://UI/Hacking/Hack-Italic.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Sounds/Hacking Interface/Key Press.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -53,9 +52,5 @@ custom_colors/font_color = Color( 0, 1, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Key Press SFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-volume_db = -15.0
 [connection signal="text_changed" from="VBoxContainer/Input" to="." method="_on_Input_text_changed"]
 [connection signal="text_entered" from="VBoxContainer/Input" to="." method="_on_Input_text_entered"]
