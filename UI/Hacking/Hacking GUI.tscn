@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://UI/Hacking/Hacking GUI.gd" type="Script" id=1]
+[ext_resource path="res://Sounds/Hacking Interface/Open.wav" type="AudioStream" id=2]
 [ext_resource path="res://UI/Hacking/Console.tscn" type="PackedScene" id=3]
 
 [node name="Hacking GUI" type="Control"]
@@ -29,4 +30,7 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 1004.0
 margin_bottom = 580.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
 [connection signal="command_entered" from="MarginContainer/Console" to="." method="_on_Console_command_entered"]
