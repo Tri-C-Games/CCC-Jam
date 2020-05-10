@@ -7,7 +7,7 @@ var jump_pressed = false
 export (Curve) var acc_curve
 export (Curve) var friction_curve
 
-var coyoteTime= 0.2;#in seconds
+var coyoteTime= 0;#in seconds
 var pressedTime = 0.2 #in seconds, anti input frustration value
 var coyoteTimer = 10
 var jumpPressedTimer=10
