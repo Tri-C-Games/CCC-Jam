@@ -71,7 +71,7 @@ func parse_command(text):
 			exit()
 			restart()
 		"help":
-			console.output_text("Set: to set variables values\nGet: to get variables values\nexit: GET OUT AND GO OUTSIDE\nrestart: Every people have a second chance", false)
+			console.output_text("set: to set variable values\nget: to get variable values\nexit: back to da game\nrestart: Everyone has a second chance", false)
 
 func exit():
 	emit_signal("exit_pressed")
