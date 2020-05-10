@@ -11,7 +11,7 @@ var max_acc = 30
 export (Curve) var friction_curve
 var max_friction = 15
 
-var coyoteTime= 0.2;#in seconds
+var coyoteTime= 0;#in seconds
 var pressedTime = 0.2 #in seconds, anti input frustration value
 var coyoteTimer = 10
 var jumpPressedTimer=10
