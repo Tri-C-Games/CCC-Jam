@@ -2,7 +2,7 @@ extends Control
 
 signal exit_pressed
 
-onready var console = get_node("TabContainer/Player/MarginContainer/VBoxContainer/Console")
+onready var console = get_node("MarginContainer/Console")
 var success_text = "The \"%s\" command has been used successfully."
 var invalid_syntax_text = "Please use the correct syntax."
 var not_recognised_text = "\'%s\' is not recognised as an internal or external command,\noperable program or batch file."
