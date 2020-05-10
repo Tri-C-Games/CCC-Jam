@@ -47,7 +47,8 @@ func get_input():
 		jump_pressed = true
 
 func movement(delta):
-	velocity.y += real_gravity * delta
+	if not is_on_floor():
+		velocity.y += real_gravity * delta
 	
 	# Friction
 	var normalized_speed = range_lerp(velocity.x, 0, real_max_speed, 0, 1)
@@ -56,13 +57,13 @@ func movement(delta):
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	if is_on_floor() and jump_pressed:
-		velocity.y -= real_jump_speed
+	if is_on_floor():
+		coyoteTimer = 0
+		if jump_pressed:
+			velocity.y -= real_jump_speed
 	
 	if jump_pressed:
 		jumpPressedTimer=0
-	if is_on_floor():
-		coyoteTimer=0
 	if coyoteTimer<=coyoteTime and jumpPressedTimer<=pressedTime:
 		velocity.y -= real_jump_speed
 		jumpPressedTimer=1000
