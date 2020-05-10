@@ -78,7 +78,7 @@ func parse_command(text):
 			var gamevars
 			console.output_text("list of variables",false)
 			for item in list:
-				if item["type"]==global.gamevar:
+				if item["type"]==typeof(global.gamevar):
 					gamevars.push_back(item["name"])
 			for item in gamevars:
 				if global.get(item).writable:
