@@ -75,7 +75,7 @@ func parse_command(text):
 			console.output_text("set: to set variable values\nget: to get variable values\nexit: back to da game\nrestart: Everyone has a second chance", false)
 		"variables":
 			var list=global.get_property_list()
-			var gamevars
+			var gamevars= []
 			console.output_text("list of variables",false)
 			for item in list:
 				if item["type"]==typeof(global.gamevar):
