@@ -126,7 +126,8 @@ func parse_command(text):
 			
 			var output = "Variables:\n"
 			for variable in global.gamevars_list:
-				output += "%s : %s - %s\n" % [variable.aliases[0], variable.type, variable.description]
+				if variable.writable:
+					output += "%s : %s - %s\n" % [variable.aliases[0], variable.type, variable.description]
 			
 			output = output.trim_suffix("\n")
 			console.output_text(output, false)
