@@ -20,11 +20,11 @@ var real_max_friction
 
 func _physics_process(delta):
 	# TODO - Could be cool to add some sort of in game effect if the player inputs a string.
-	real_gravity = float(global.gravity) if global.gravity.is_valid_float() else 0.0
-	real_jump_speed = float(global.player_jump_speed) if global.player_jump_speed.is_valid_float() else 0.0
-	real_max_speed = float(global.player_max_speed) if global.player_max_speed.is_valid_float() else 0.0
-	real_max_acc = float(global.player_max_acc) if global.player_max_acc.is_valid_float() else 0.0
-	real_max_friction = float(global.player_max_friction) if global.player_max_friction.is_valid_float() else 0.0
+	real_gravity = float(global.gravity.value) if global.gravity.value.is_valid_float() else 0.0
+	real_jump_speed = float(global.player_jump_speed) if global.player_jump_speed.value.is_valid_float() else 0.0
+	real_max_speed = float(global.player_max_speed) if global.player_max_speed.value.is_valid_float() else 0.0
+	real_max_acc = float(global.player_max_acc) if global.player_max_acc.value.is_valid_float() else 0.0
+	real_max_friction = float(global.player_max_friction) if global.player_max_friction.value.is_valid_float() else 0.0
 	
 	get_input()
 	movement(delta)
