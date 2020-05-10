@@ -9,7 +9,9 @@ var not_recognised_text = "\'%s\' is not recognised as an internal or external c
 
 var usable_commands = {
 	# command : min parameter size
-	"set" : 3
+	"set" : 3,
+	"get" : 2,
+	"exit" : 1
 }
 
 func _on_Console_command_entered(command):
@@ -29,16 +31,35 @@ func parse_command(text):
 		console.output_error(invalid_syntax_text)
 		return
 	
-	var variable = separated_command[1].to_lower()
-	var g = global.get(variable)
-	if not g:
-		console.output_error(not_recognised_text % variable)
-		return
+	var return_success = false;
 	
-	var result = separated_command[2].to_lower()
-	global.set(variable, result)
+	match command:
+		"set":
+			var variable = separated_command[1].to_lower()
+			var value = global.get(variable)
+			if not value:
+				console.output_error(not_recognised_text % variable)
+				return
+			
+			var new_value = separated_command[2].to_lower()
+			global.set(variable, new_value)
+			return_success = true
+		"get":
+			var variable = separated_command[1].to_lower()
+			var value = global.get(variable)
+			if not value:
+				console.output_error(not_recognised_text % variable)
+				return
+			
+			console.output_text(value, false)
+		"exit":
+			exit()
 	
-	console.output_text(success_text % command, false)
+	if return_success:
+		console.output_text(success_text % command, false)
+
+func exit():
+	emit_signal("exit_pressed")
 
 func _on_Exit_pressed():
-	emit_signal("exit_pressed")
+	exit()
