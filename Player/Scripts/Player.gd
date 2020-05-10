@@ -1,11 +1,12 @@
 extends KinematicBody2D
 
 var velocity = Vector2()
-var player_speed = 300 #Max speed of the player
-var player_jump_speed = 400
-var player_health = 100 #The health of the payer
 var can_walk = true #For checking if the player is moving
 var jump_pressed = false
+
+export (Curve) var acc_curve
+var max_speed = 300
+var max_acc = 30
 
 var coyoteTime= 0.2;#in seconds
 var pressedTime = 0.2 #in seconds, anti input frustration value
@@ -34,7 +35,9 @@ func get_input():
 	if Input.is_action_pressed("move_left"):
 		input_velocity -= 1
 	
-	velocity.x = input_velocity * real_speed
+	var normalized_speed = range_lerp(velocity.x, 0, max_speed, 0, 1)
+	var acc = acc_curve.interpolate(abs(normalized_speed)) * max_acc
+	velocity.x += input_velocity * acc
 	
 	jump_pressed = false
 	if Input.is_action_pressed("jump"):
@@ -42,7 +45,7 @@ func get_input():
 
 func movement(delta):
 	velocity.y += real_gravity * delta
-	#please add an accel curve (i can do it if u ask) Jix
+	# TODO - Friction
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	if is_on_floor() and jump_pressed:

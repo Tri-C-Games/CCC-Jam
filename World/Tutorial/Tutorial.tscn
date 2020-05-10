@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Player/Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Tile Sheet.png" type="Texture" id=2]
@@ -343,6 +343,9 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 size = 30
 font_data = ExtResource( 3 )
 
+[sub_resource type="Curve" id=24]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -0.0109818, 0.0, 0, 0 ]
+
 [node name="Tutorial" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -380,3 +383,4 @@ texture = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 light_mask = 3
+acc_curve = SubResource( 24 )
