@@ -15,7 +15,6 @@ var usable_commands = {
 	"restart" : 1
 }
 
-
 func _on_Console_command_entered(command):
 	parse_command(command)
 

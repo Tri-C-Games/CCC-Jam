@@ -19,3 +19,7 @@ func output_text(text, from_user):
 
 func output_error(error):
 	output.bbcode_text = str(output.bbcode_text, "\n[color=greenConsole]", error, "[/color]")
+
+func _on_Input_text_changed(_new_text):
+	# Typing SFX
+	$"Key Press SFX".play()
