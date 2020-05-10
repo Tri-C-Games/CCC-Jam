@@ -11,7 +11,6 @@ func toggle_console():
 	$"Hacking GUI".visible = not $"Hacking GUI".visible
 	var tree = get_tree()
 	tree.paused = not tree.paused
-
-
-func _on_Button_pressed():
-	$AudioStreamPlayer.play()
+	
+	if tree.paused:
+		$"Open SFX".play()

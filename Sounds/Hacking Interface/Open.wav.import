@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Hack.wav-fb06f20e635842359089dd64064a486a.sample"
+path="res://.import/Open.wav-6b702b16d712404691b0f0225814188e.sample"
 
 [deps]
 
-source_file="res://Sounds/HUD/Hack.wav"
-dest_files=[ "res://.import/Hack.wav-fb06f20e635842359089dd64064a486a.sample" ]
+source_file="res://Sounds/Hacking Interface/Open.wav"
+dest_files=[ "res://.import/Open.wav-6b702b16d712404691b0f0225814188e.sample" ]
 
 [params]
 

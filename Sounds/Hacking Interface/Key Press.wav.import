@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Key Press.wav-5ba0907818799f197e445223e95c7908.sample"
+
+[deps]
+
+source_file="res://Sounds/Hacking Interface/Key Press.wav"
+dest_files=[ "res://.import/Key Press.wav-5ba0907818799f197e445223e95c7908.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
