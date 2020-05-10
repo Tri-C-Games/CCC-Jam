@@ -1,5 +1,7 @@
 extends Node
 
+# All variables in here will be changeable in the console.
+
 # General
 # Movement
 var gravity = "500"
