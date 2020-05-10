@@ -9,9 +9,9 @@ var not_recognised_text = "\'%s\' is not recognised as an internal or external c
 
 var usable_commands = {
 	# command : min parameter size
-	"set" : 4,
-	"get" : 3,
-	"exit" : 2,
+	"set" : 3,
+	"get" : 2,
+	"exit" : 1,
 	"restart" : 1
 }
 
@@ -20,37 +20,49 @@ func _on_Console_command_entered(command):
 	parse_command(command)
 
 func parse_command(text):
+	# Separate the command into words. E.g. "set player_max_speed 100" will return ["set", "player_max_speed", "100"].
 	var separated_command = text.split(" ")
 	
+	# Lower case to ensure that even if the player adds an extra capital somewhere that it will still work fine.
 	var command = separated_command[0].to_lower()
 	
+	# Some commands need more parameters than others. E.g. The set command needs the variable changed and the new value while exit doesn't need anything else.
 	var min_size = usable_commands.get(command)
 	if not min_size:
 		console.output_error(not_recognised_text % command)
 		return
 	
+	# If the user doesn't use enough parameters then output an error.
 	if separated_command.size() < min_size:
 		console.output_error(invalid_syntax_text)
 		return
+	
+	# Different commands do different things.
 	match command:
 		"set":
 			var variable = separated_command[1].to_lower()
+			
+			# Check if the variable actually exists.
 			var value = global.get(variable)
 			if not value:
 				console.output_error(not_recognised_text % variable)
 				return
 			
+			# Change the variable's value to the new value that the player chose.
 			var new_value = separated_command[2].to_lower()
 			global.set(variable, new_value)
 			
 			console.output_text("[i]%s has been set to %s.[/i]" % [variable, new_value], false)
 		"get":
 			var variable = separated_command[1].to_lower()
+			
+			# Check if the variable actually exists.
 			var value = global.get(variable)
 			if not value:
 				console.output_error(not_recognised_text % variable)
 				return
 			
+			# If it does then output the variable's value.
 			console.output_text(value, false)
 		"exit":
 			exit()
