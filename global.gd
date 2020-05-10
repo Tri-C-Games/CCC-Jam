@@ -13,15 +13,7 @@ func gamevar(var value:String="", var description:String="", var writable:bool=t
 	variable.writable=writable
 	variable.writable=writable
 	return variable
-# General
-# Movement
-#var gravity = "500"
-#var player_fly = "false"
-#var player_max_speed = "600"
-#var player_max_acc = "70"
-#var player_max_friction = "60"
-#var player_jump_speed = "200"
-#var player_health = "100"
+
 var gravity:gamevar
 var player_fly:gamevar
 var player_max_speed:gamevar

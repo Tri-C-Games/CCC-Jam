@@ -14,7 +14,8 @@ var usable_commands = {
 	"exit" : 1,
 	"restart" : 1,
 	"fly" : 2,
-	"help" : 1
+	"help" : 1,
+	"variables": 1
 }
 
 func _on_Console_command_entered(command):
@@ -72,6 +73,16 @@ func parse_command(text):
 			restart()
 		"help":
 			console.output_text("set: to set variable values\nget: to get variable values\nexit: back to da game\nrestart: Everyone has a second chance", false)
+		"variables":
+			var list=global.get_property_list()
+			var gamevars
+			console.output_text("list of variables",false)
+			for item in list:
+				if item["type"]==global.gamevar:
+					gamevars.push_back(item["name"])
+			for item in gamevars:
+				if global.get(item).writable:
+					console.output_text(item+": "+global.get(item).description,false)
 
 func exit():
 	emit_signal("exit_pressed")
