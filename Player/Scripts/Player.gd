@@ -7,7 +7,7 @@ var player_health = 100 #The health of the payer
 var can_walk = true #For checking if the player is moving
 var jump_pressed = false
 
-var coyote_time= 0.2;#in seconds
+var coyoteTime= 0.2;#in seconds
 var pressedTime = 0.2 #in seconds, anti input frustration value
 var coyoteTimer = 10
 var jumpPressedTimer=10
@@ -52,7 +52,7 @@ func movement(delta):
 		jumpPressedTimer=0
 	if is_on_floor():
 		coyoteTimer=0
-	if coyoteTimer<=coyote_time and jumpPressedTimer<=pressedTime:
+	if coyoteTimer<=coyoteTime and jumpPressedTimer<=pressedTime:
 		velocity.y -= real_jump_speed
 		jumpPressedTimer=1000
 		coyoteTimer=1000
