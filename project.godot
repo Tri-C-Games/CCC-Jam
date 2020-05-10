@@ -17,6 +17,7 @@ _global_script_class_icons={
 
 config/name="CCC Jam"
 run/main_scene="res://World/Tutorial/Tutorial.tscn"
+boot_splash/bg_color=Color( 0.352941, 0.627451, 1, 1 )
 config/icon="res://icon.png"
 
 [autoload]
@@ -81,4 +82,3 @@ open_console={
 [rendering]
 
 quality/2d/use_pixel_snap=true
-environment/default_environment="res://default_env.tres"
