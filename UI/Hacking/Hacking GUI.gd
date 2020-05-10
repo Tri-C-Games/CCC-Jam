@@ -67,6 +67,7 @@ func parse_command(text):
 		"exit":
 			exit()
 		"restart":
+			exit()
 			restart()
 
 func exit():
