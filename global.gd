@@ -7,7 +7,7 @@ class gamevar:
 	var writable: bool=true
 	
 func gamevar(var value:String="", var description:String="", var writable:bool=true):
-	var variable=gamevar.new
+	var variable=gamevar.new()
 	variable.value=value
 	variable.description=description
 	variable.writable=writable

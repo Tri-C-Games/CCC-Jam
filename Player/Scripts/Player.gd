@@ -21,10 +21,10 @@ var real_max_friction
 func _physics_process(delta):
 	# TODO - Could be cool to add some sort of in game effect if the player inputs a string.
 	real_gravity = float(global.gravity.value) if global.gravity.value.is_valid_float() else 0.0
-	real_jump_speed = float(global.player_jump_speed) if global.player_jump_speed.value.is_valid_float() else 0.0
-	real_max_speed = float(global.player_max_speed) if global.player_max_speed.value.is_valid_float() else 0.0
-	real_max_acc = float(global.player_max_acc) if global.player_max_acc.value.is_valid_float() else 0.0
-	real_max_friction = float(global.player_max_friction) if global.player_max_friction.value.is_valid_float() else 0.0
+	real_jump_speed = float(global.player_jump_speed.value) if global.player_jump_speed.value.is_valid_float() else 0.0
+	real_max_speed = float(global.player_max_speed.value) if global.player_max_speed.value.is_valid_float() else 0.0
+	real_max_acc = float(global.player_max_acc.value) if global.player_max_acc.value.is_valid_float() else 0.0
+	real_max_friction = float(global.player_max_friction.value) if global.player_max_friction.value.is_valid_float() else 0.0
 	
 	get_input()
 	movement(delta)
@@ -43,11 +43,11 @@ func get_input():
 	velocity.x += input_velocity * acc
 	
 	jump_pressed = false
-	if global.player_fly == "false":
+	if global.player_fly.value == "false":
 		if Input.is_action_pressed("jump"):
 			jump_pressed = true
 	
-	if global.player_fly == "true":
+	if global.player_fly.value == "true":
 		if Input.is_action_pressed("jump"):
 			velocity.y -= 10
 
