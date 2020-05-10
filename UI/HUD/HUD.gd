@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+onready var input = get_node("Hacking GUI/MarginContainer/Console/VBoxContainer/Input")
+
 func _ready():
 	$"Hacking GUI".visible = false
 
@@ -8,6 +10,9 @@ func _input(_event):
 		toggle_console()
 
 func toggle_console():
+	input.clear()
+	input.grab_focus()
+	
 	$"Hacking GUI".visible = not $"Hacking GUI".visible
 	var tree = get_tree()
 	tree.paused = not tree.paused
