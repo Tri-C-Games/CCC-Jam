@@ -26,6 +26,7 @@ __meta__ = {
 }
 
 [node name="Dialogue Box" type="ColorRect" parent="."]
+visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -54,4 +55,3 @@ visible = false
 stream = ExtResource( 6 )
 volume_db = -20.0
 [connection signal="pressed" from="TextureButton" to="." method="toggle_console"]
-[connection signal="exit_pressed" from="Hacking GUI" to="." method="toggle_console"]

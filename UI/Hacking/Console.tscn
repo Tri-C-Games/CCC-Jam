@@ -11,19 +11,12 @@ font_data = ExtResource( 3 )
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
 
-[node name="Console" type="Control"]
+[node name="Console" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-size_flags_vertical = 3
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 0.901961 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -31,6 +24,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 size_flags_vertical = 3
 custom_constants/separation = 0
 __meta__ = {
@@ -40,6 +34,7 @@ __meta__ = {
 [node name="Output" type="RichTextLabel" parent="VBoxContainer"]
 margin_right = 1024.0
 margin_bottom = 581.0
+mouse_filter = 2
 size_flags_vertical = 3
 theme = ExtResource( 2 )
 custom_fonts/italics_font = SubResource( 1 )
@@ -62,5 +57,4 @@ __meta__ = {
 [node name="Key Press SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -15.0
-[connection signal="text_changed" from="VBoxContainer/Input" to="." method="_on_Input_text_changed"]
 [connection signal="text_entered" from="VBoxContainer/Input" to="." method="_on_Input_text_entered"]

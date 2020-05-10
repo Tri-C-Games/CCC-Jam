@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-onready var input = get_node("Hacking GUI/MarginContainer/Console/VBoxContainer/Input")
+onready var input = get_node("Hacking GUI/Console/VBoxContainer/Input")
 
 func _ready():
 	$"Hacking GUI".visible = false

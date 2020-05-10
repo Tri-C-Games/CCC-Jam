@@ -4,28 +4,20 @@
 [ext_resource path="res://Sounds/Hacking Interface/Open.wav" type="AudioStream" id=2]
 [ext_resource path="res://UI/Hacking/Console.tscn" type="PackedScene" id=3]
 
-[node name="Hacking GUI" type="Control"]
+[node name="Hacking GUI" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
+mouse_filter = 2
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 1
-custom_constants/margin_right = 20
-custom_constants/margin_top = 20
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Console" parent="MarginContainer" instance=ExtResource( 3 )]
+[node name="Console" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 20.0
@@ -35,4 +27,4 @@ margin_bottom = 580.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-[connection signal="command_entered" from="MarginContainer/Console" to="." method="_on_Console_command_entered"]
+[connection signal="command_entered" from="Console" to="." method="_on_Console_command_entered"]
