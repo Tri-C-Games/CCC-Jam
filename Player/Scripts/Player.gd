@@ -7,6 +7,7 @@ var player_health = 100 #The health of the payer
 var can_walk = true #For checking if the player is moving
 var jump_pressed = false
 
+var coyote_time= 0.2;#in seconds
 var pressedTime = 0.2 #in seconds, anti input frustration value
 var coyoteTimer = 10
 var jumpPressedTimer=10
@@ -14,14 +15,12 @@ var jumpPressedTimer=10
 var real_gravity
 var real_speed
 var real_jump_speed
-var real_coyote_time
 
 func _physics_process(delta):
 	# TODO - Could be cool to add some sort of in game effect if the player inputs a string.
 	real_gravity = float(global.gravity) if global.gravity.is_valid_float() else 0
 	real_speed = float(global.player_speed) if global.player_speed.is_valid_float() else 0
 	real_jump_speed = float(global.player_jump_speed) if global.player_jump_speed.is_valid_float() else 0
-	real_coyote_time = float(global.player_coyote_time) if global.player_coyote_time.is_valid_float() else 0
 	
 	get_input()
 	movement(delta)
@@ -53,7 +52,7 @@ func movement(delta):
 		jumpPressedTimer=0
 	if is_on_floor():
 		coyoteTimer=0
-	if coyoteTimer<=real_coyote_time and jumpPressedTimer<=pressedTime:
+	if coyoteTimer<=coyote_time and jumpPressedTimer<=pressedTime:
 		velocity.y -= real_jump_speed
 		jumpPressedTimer=1000
 		coyoteTimer=1000
