@@ -1,7 +1,6 @@
 extends Control
 
 signal exit_pressed
-signal set_command_used
 
 onready var console = get_node("TabContainer/Player/MarginContainer/VBoxContainer/Console")
 var success_text = "The \"%s\" command has been used successfully."
@@ -10,7 +9,9 @@ var not_recognised_text = "\'%s\' is not recognised as an internal or external c
 
 var usable_commands = {
 	# command : min parameter size
-	"set" : 3
+	"set" : 3,
+	"get" : 2,
+	"exit" : 1
 }
 
 func _on_Console_command_entered(command):
@@ -30,16 +31,31 @@ func parse_command(text):
 		console.output_error(invalid_syntax_text)
 		return
 	
-	var variable = separated_command[1].to_lower()
-	var g = global.get(variable)
-	if not g:
-		console.output_error(not_recognised_text % variable)
-		return
-	
-	var result = separated_command[2].to_lower()
-	global.set(variable, result)
-	
-	console.output_text(success_text % command, false)
+	match command:
+		"set":
+			var variable = separated_command[1].to_lower()
+			var value = global.get(variable)
+			if not value:
+				console.output_error(not_recognised_text % variable)
+				return
+			
+			var new_value = separated_command[2].to_lower()
+			global.set(variable, new_value)
+			
+			console.output_text("[i]%s has been set to %s.[/i]" % [variable, new_value], false)
+		"get":
+			var variable = separated_command[1].to_lower()
+			var value = global.get(variable)
+			if not value:
+				console.output_error(not_recognised_text % variable)
+				return
+			
+			console.output_text(value, false)
+		"exit":
+			exit()
+
+func exit():
+	emit_signal("exit_pressed")
 
 func _on_Exit_pressed():
-	emit_signal("exit_pressed")
+	exit()

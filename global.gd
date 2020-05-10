@@ -6,8 +6,9 @@ var gravity = "500"
 
 # Player
 # Movement
-var player_speed = "300"
+var player_max_speed = "600"
+var player_max_acc = "70"
+var player_max_friction = "60"
 var player_jump_speed = "200"
-var player_coyote_time= "0.2";#in seconds
 # Stats
 var player_health = "100"
