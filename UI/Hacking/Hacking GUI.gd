@@ -78,4 +78,4 @@ func _on_Exit_pressed():
 
 func restart():
 	if get_tree().reload_current_scene() != OK:
-		print_debug("An error occured while attempting to reload the current scene.")
+		print_debug("An error occurred while attempting to reload the current scene.")
