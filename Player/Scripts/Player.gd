@@ -8,6 +8,9 @@ export (Curve) var acc_curve
 var max_speed = 300
 var max_acc = 30
 
+export (Curve) var friction_curve
+var max_friction = 15
+
 var coyoteTime= 0.2;#in seconds
 var pressedTime = 0.2 #in seconds, anti input frustration value
 var coyoteTimer = 10
@@ -45,7 +48,12 @@ func get_input():
 
 func movement(delta):
 	velocity.y += real_gravity * delta
-	# TODO - Friction
+	
+	# Friction
+	var normalized_speed = range_lerp(velocity.x, 0, max_speed, 0, 1)
+	var friction = friction_curve.interpolate(abs(normalized_speed)) * max_friction
+	velocity.x -= sign(velocity.x) * friction
+	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	if is_on_floor() and jump_pressed:
