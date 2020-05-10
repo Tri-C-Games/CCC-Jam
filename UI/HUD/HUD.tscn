@@ -27,6 +27,7 @@ __meta__ = {
 }
 
 [node name="Dialogue Box" parent="." instance=ExtResource( 1 )]
+visible = false
 
 [node name="Hacking GUI" parent="." instance=ExtResource( 3 )]
 visible = false

@@ -57,4 +57,5 @@ __meta__ = {
 [node name="Key Press SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -15.0
+[connection signal="text_changed" from="VBoxContainer/Input" to="." method="_on_Input_text_changed"]
 [connection signal="text_entered" from="VBoxContainer/Input" to="." method="_on_Input_text_entered"]

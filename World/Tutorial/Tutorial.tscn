@@ -1,8 +1,9 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Player/Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Tile Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Font/pixeljosh6.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://World/Tutorial/Tutorial.gd" type="Script" id=4]
 [ext_resource path="res://World/Sky/Sky.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -471,6 +472,7 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -0.0109818, 0.0, 0, 
 _data = [ Vector2( 0, 0 ), 0.0, 1.46504, 0, 0, Vector2( 1, 1 ), 0.0810449, 0.0, 0, 0 ]
 
 [node name="Tutorial" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="Sky" parent="." instance=ExtResource( 7 )]
 
