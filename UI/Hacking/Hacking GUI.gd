@@ -14,6 +14,7 @@ var usable_commands = {
 	"exit" : 1,
 	"restart" : 1,
 	"fly" : 2,
+	"help" : 1
 }
 
 
@@ -70,6 +71,8 @@ func parse_command(text):
 		"restart":
 			exit()
 			restart()
+		"help":
+			console.output_text("Set: to set variables values\nGet: to get variables values\nexit: GET OUT AND GO OUTSIDE\nrestart: Every people have a second chance", false)
 
 func exit():
 	emit_signal("exit_pressed")
