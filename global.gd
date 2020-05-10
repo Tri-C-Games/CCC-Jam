@@ -8,6 +8,7 @@ var gravity = "500"
 
 # Player
 # Movement
+var player_fly = "false"
 var player_max_speed = "600"
 var player_max_acc = "70"
 var player_max_friction = "60"

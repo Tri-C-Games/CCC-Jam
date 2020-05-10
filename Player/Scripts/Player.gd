@@ -43,8 +43,13 @@ func get_input():
 	velocity.x += input_velocity * acc
 	
 	jump_pressed = false
-	if Input.is_action_pressed("jump"):
-		jump_pressed = true
+	if global.player_fly == "false":
+		if Input.is_action_pressed("jump"):
+			jump_pressed = true
+	
+	if global.player_fly == "true":
+		if Input.is_action_pressed("jump"):
+			velocity.y -= 10
 
 func movement(delta):
 	if not is_on_floor():

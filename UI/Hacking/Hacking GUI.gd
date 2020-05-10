@@ -12,7 +12,8 @@ var usable_commands = {
 	"set" : 3,
 	"get" : 2,
 	"exit" : 1,
-	"restart" : 1
+	"restart" : 1,
+	"fly" : 2,
 }
 
 
