@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Player/Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Tile Sheet.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Sprites/Tutorial/Up.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Tutorial/Right.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Tutorial/Left.png" type="Texture" id=6]
+[ext_resource path="res://World/Tutorial/Devlopper Colision.gd" type="Script" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -472,6 +473,9 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -0.0109818, 0.0, 0, 
 [sub_resource type="Curve" id=38]
 _data = [ Vector2( 0, 0 ), 0.0, 1.46504, 0, 0, Vector2( 1, 1 ), 0.0810449, 0.0, 0, 0 ]
 
+[sub_resource type="RectangleShape2D" id=39]
+extents = Vector2( 266.303, 218.144 )
+
 [node name="Tutorial" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -511,3 +515,12 @@ texture = ExtResource( 4 )
 light_mask = 3
 acc_curve = SubResource( 37 )
 friction_curve = SubResource( 38 )
+
+[node name="Devlopper Colision" type="Area2D" parent="."]
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Devlopper Colision"]
+position = Vector2( 2170.17, -409.765 )
+shape = SubResource( 39 )
+disabled = true
+[connection signal="body_entered" from="Devlopper Colision" to="Devlopper Colision" method="_on_Devlopper_Colision_body_entered"]

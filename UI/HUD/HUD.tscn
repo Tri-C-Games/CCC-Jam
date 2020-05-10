@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UI/Hacking/Console Theme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/HUD/HUD.gd" type="Script" id=2]
 [ext_resource path="res://UI/Hacking/Hacking GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/Terminal/Terminal2.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Terminal/Terminal.png" type="Texture" id=5]
+[ext_resource path="res://Sounds/HUD/Hack.wav" type="AudioStream" id=6]
 
 [node name="HUD" type="CanvasLayer"]
 pause_mode = 2
@@ -35,5 +36,9 @@ texture_pressed = ExtResource( 4 )
 
 [node name="Hacking GUI" parent="." instance=ExtResource( 3 )]
 visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="MarginContainer/Button" to="." method="toggle_console"]
 [connection signal="exit_pressed" from="Hacking GUI" to="." method="toggle_console"]
