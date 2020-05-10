@@ -31,8 +31,6 @@ func parse_command(text):
 		console.output_error(invalid_syntax_text)
 		return
 	
-	var return_success = false;
-	
 	match command:
 		"set":
 			var variable = separated_command[1].to_lower()
@@ -43,7 +41,8 @@ func parse_command(text):
 			
 			var new_value = separated_command[2].to_lower()
 			global.set(variable, new_value)
-			return_success = true
+			
+			console.output_text("[i]%s has been set to %s.[/i]" % [variable, new_value], false)
 		"get":
 			var variable = separated_command[1].to_lower()
 			var value = global.get(variable)
@@ -54,9 +53,6 @@ func parse_command(text):
 			console.output_text(value, false)
 		"exit":
 			exit()
-	
-	if return_success:
-		console.output_text(success_text % command, false)
 
 func exit():
 	emit_signal("exit_pressed")
