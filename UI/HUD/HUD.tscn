@@ -39,6 +39,7 @@ visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+volume_db = -20.0
 [connection signal="pressed" from="MarginContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="MarginContainer/Button" to="." method="toggle_console"]
 [connection signal="exit_pressed" from="Hacking GUI" to="." method="toggle_console"]

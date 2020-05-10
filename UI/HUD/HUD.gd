@@ -12,6 +12,5 @@ func toggle_console():
 	var tree = get_tree()
 	tree.paused = not tree.paused
 
-
 func _on_Button_pressed():
 	$AudioStreamPlayer.play()
