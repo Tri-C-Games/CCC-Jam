@@ -9,10 +9,12 @@ var not_recognised_text = "\'%s\' is not recognised as an internal or external c
 
 var usable_commands = {
 	# command : min parameter size
-	"set" : 3,
-	"get" : 2,
-	"exit" : 1
+	"set" : 4,
+	"get" : 3,
+	"exit" : 2,
+	"restart" : 1
 }
+
 
 func _on_Console_command_entered(command):
 	parse_command(command)
@@ -30,7 +32,6 @@ func parse_command(text):
 	if separated_command.size() < min_size:
 		console.output_error(invalid_syntax_text)
 		return
-	
 	match command:
 		"set":
 			var variable = separated_command[1].to_lower()
@@ -53,9 +54,14 @@ func parse_command(text):
 			console.output_text(value, false)
 		"exit":
 			exit()
+		"restart":
+			restart()
 
 func exit():
 	emit_signal("exit_pressed")
 
 func _on_Exit_pressed():
 	exit()
+
+func restart():
+	get_tree().reload_current_scene()
