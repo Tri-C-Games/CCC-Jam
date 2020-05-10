@@ -347,7 +347,7 @@ font_data = ExtResource( 3 )
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -0.0109818, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=25]
-_data = [ Vector2( 0.00238663, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), -0.0929045, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 1.46504, 0, 0, Vector2( 1, 1 ), 0.0810449, 0.0, 0, 0 ]
 
 [node name="Tutorial" type="Node2D"]
 

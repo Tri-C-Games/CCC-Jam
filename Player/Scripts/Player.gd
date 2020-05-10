@@ -5,11 +5,11 @@ var can_walk = true #For checking if the player is moving
 var jump_pressed = false
 
 export (Curve) var acc_curve
-var max_speed = 300
-var max_acc = 30
+var max_speed = 600
+var max_acc = 70
 
 export (Curve) var friction_curve
-var max_friction = 15
+var max_friction = 60
 
 var coyoteTime= 0.2;#in seconds
 var pressedTime = 0.2 #in seconds, anti input frustration value
