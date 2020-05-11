@@ -490,5 +490,9 @@ __meta__ = {
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 light_mask = 3
+position = Vector2( 1144, -216 )
 acc_curve = SubResource( 36 )
 friction_curve = SubResource( 37 )
+
+[node name="Falling Tile" type="Position2D" parent="."]
+position = Vector2( 1368, -376 )

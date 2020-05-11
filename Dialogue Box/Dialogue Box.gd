@@ -63,6 +63,9 @@ func stop_dialogue():
 
 func kill_dialogue():
 	visible = false
+	increment_timer.stop()
+	next_dialogue_timer.stop()
+	stop_timer.stop()
 	emit_signal("finished")
 
 func _on_Stop_Dialogue_Timer_timeout():
