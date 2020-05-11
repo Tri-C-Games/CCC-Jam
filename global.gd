@@ -69,12 +69,13 @@ onready var restart_command = command.new("restart", "Restart the game", 1)
 onready var gravity = gamevar.new(["gravity"], "500", "Number", "The value of the gravity")
 
 #Player Vars
-onready var player_fly = gamevar.new(["player_fly"], "false", "True/False", "The player's ability to fly")
-onready var player_max_speed = gamevar.new(["player_max_speed", "player_speed"], "600", "Number", "The maximum speed at which the player can go")
-onready var player_max_acc = gamevar.new(["player_max_acc", "player_acc"], "70", "Number", "The maximum acceleration the player can be applying")
-onready var player_max_friction = gamevar.new(["player_max_friction", "player_friction"], "60", "Number", "The maximum friction that can be applied to the player")
-onready var player_jump_speed = gamevar.new(["player_jump_speed", "player_jump"], "200", "Number", "The speed (or force) applied to the player when jumping")
-onready var player_health = gamevar.new(["player_health"], "100", "Number", "The health that the player has")
+onready var player_fly = gamevar.new(["player_fly", "fly"], "false", "True/False", "The player's ability to fly")
+onready var player_fly_speed = gamevar.new(["player_fly_speed", "fly_speed"], "50", "Number", "How fast the player flies")
+onready var player_max_speed = gamevar.new(["player_max_speed", "player_speed", "speed"], "600", "Number", "The maximum speed at which the player can go")
+onready var player_max_acc = gamevar.new(["player_max_acc", "player_acc", "acc"], "70", "Number", "The maximum acceleration the player can be applying")
+onready var player_max_friction = gamevar.new(["player_max_friction", "player_friction", "friction"], "60", "Number", "The maximum friction that can be applied to the player")
+onready var player_jump_speed = gamevar.new(["player_jump_speed", "player_jump", "jump"], "200", "Number", "The speed (or force) applied to the player when jumping")
+onready var player_health = gamevar.new(["player_health", "health", "hp"], "100", "Number", "The health that the player has")
 
 #Enemies Vars
 

@@ -36,13 +36,8 @@ func get_input():
 		velocity.x += input_velocity * acc
 	
 	jump_pressed = false
-	if global.player_fly.value == "false":
-		if Input.is_action_pressed("jump"):
-			jump_pressed = true
-	
-	if global.player_fly.value == "true":
-		if Input.is_action_pressed("jump"):
-			velocity.y -= 10
+	if Input.is_action_pressed("jump") if not global.player_fly.real_value else Input.is_action_just_pressed("jump"):
+		jump_pressed = true
 
 func movement(delta):
 	velocity.y += global.gravity.real_value * delta
@@ -55,10 +50,10 @@ func movement(delta):
 
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	if is_on_floor():
+	if is_on_floor() || global.player_fly.real_value:
 		coyoteTimer = 0
 		if jump_pressed:
-			velocity.y -= global.player_jump_speed.real_value
+			velocity.y -= global.player_jump_speed.real_value if not global.player_fly.real_value else global.player_fly_speed.real_value
 	
 	if jump_pressed:
 		jumpPressedTimer=0
