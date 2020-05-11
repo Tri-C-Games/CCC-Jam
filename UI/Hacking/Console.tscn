@@ -39,8 +39,10 @@ theme = ExtResource( 2 )
 custom_fonts/italics_font = SubResource( 1 )
 custom_colors/default_color = Color( 0, 1, 0, 1 )
 bbcode_enabled = true
-bbcode_text = "Hacking Interface - ESC to toggle"
-text = "Hacking Interface - ESC to toggle"
+bbcode_text = "Developer Console - ESC to toggle
+Type 'help' for a list of commands"
+text = "Developer Console - ESC to toggle
+Type 'help' for a list of commands"
 
 [node name="Input" type="LineEdit" parent="VBoxContainer"]
 margin_top = 581.0
