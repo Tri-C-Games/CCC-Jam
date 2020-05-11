@@ -1,5 +1,7 @@
 extends ColorRect
 
+signal finished
+
 onready var rich_text_label = get_node("ColorRect/RichTextLabel")
 onready var increment_timer = get_node("Increment Visible Characters Timer")
 onready var pause_timer = get_node("Typing Pause Timer")
@@ -53,6 +55,7 @@ func _on_Disappear_Timer_timeout():
 		return
 	
 	visible = false
+	emit_signal("finished")
 
 func _on_Button_pressed():
 	rich_text_label.visible_characters = rich_text_label.get_total_character_count()
