@@ -19,6 +19,3 @@ func toggle_console():
 	
 	if tree.paused:
 		$"Open SFX".play()
-
-func play_key_press_sfx():
-	$"Key Press SFX".play()

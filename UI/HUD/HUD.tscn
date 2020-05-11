@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Dialogue Box/Dialogue Box.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/HUD/HUD.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Sprites/Terminal/Terminal2.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Terminal/Terminal.png" type="Texture" id=5]
 [ext_resource path="res://Sounds/Hacking Interface/Open.wav" type="AudioStream" id=6]
-[ext_resource path="res://Sounds/Hacking Interface/Key Press.wav" type="AudioStream" id=7]
 
 [node name="HUD" type="CanvasLayer"]
 pause_mode = 2
@@ -36,9 +35,5 @@ visible = false
 [node name="Open SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -20.0
-
-[node name="Key Press SFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-volume_db = -15.0
 [connection signal="pressed" from="TextureButton" to="." method="toggle_console"]
 [connection signal="exit_pressed" from="Hacking GUI" to="." method="toggle_console"]

@@ -141,3 +141,6 @@ func _on_Exit_pressed():
 func restart():
 	if get_tree().reload_current_scene() != OK:
 		print_debug("An error occurred while attempting to reload the current scene.")
+
+func _on_Console_input_text_changed():
+	$"Key Press SFX".play()

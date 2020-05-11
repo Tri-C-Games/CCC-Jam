@@ -14,7 +14,7 @@ func start_dialogue(text):
 
 func _on_Increment_Visible_Characters_Timer_timeout():
 	rich_text_label.visible_characters += 1
-	get_parent().play_key_press_sfx()
+	$"Key Press SFX".play()
 	var new_char = rich_text_label.text[rich_text_label.visible_characters - 1]
 	
 	if rich_text_label.visible_characters == rich_text_label.get_total_character_count():
@@ -34,8 +34,12 @@ func _on_Typing_Pause_Timer_timeout():
 	increment_timer.start()
 
 func stop_incrementing():
-	$"Increment Visible Characters Timer".stop()
+	increment_timer.stop()
 	$"Disappear Timer".start()
 
 func _on_Disappear_Timer_timeout():
 	visible = false
+
+func _on_Button_pressed():
+	rich_text_label.visible_characters = rich_text_label.get_total_character_count()
+	stop_incrementing()

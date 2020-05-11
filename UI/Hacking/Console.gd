@@ -1,6 +1,7 @@
 extends Control
 
 signal command_entered
+signal input_text_changed
 
 onready var input = get_node("VBoxContainer/Input")
 onready var output = get_node("VBoxContainer/Output")
@@ -20,4 +21,4 @@ func output_error(error):
 	output.bbcode_text = str(output.bbcode_text, "\n", error)
 
 func _on_Input_text_changed(_new_text):
-	get_parent().get_parent().play_key_press_sfx()
+	emit_signal("input_text_changed")
