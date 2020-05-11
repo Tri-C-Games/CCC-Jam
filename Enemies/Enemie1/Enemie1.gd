@@ -2,8 +2,6 @@ extends KinematicBody2D
 
 onready var raycast = get_node("RayCast2D")
 onready var anim_sprite = get_node("AnimatedSprite")
-onready var player_velocity = get_parent().get_node("Player")
-
 
 var velocity = Vector2()  
 const RIGHT = 1
@@ -42,6 +40,6 @@ func die():
 	queue_free()
 
 func _on_Area2D_body_entered(body):
-	player_velocity.position.y -= 20
-	if body.name == "Player":
+	if body.has_method("knockback"):
+		body.knockback(global.player_damage_bounce.real_value, Vector2.UP)
 		die()

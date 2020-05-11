@@ -15,13 +15,7 @@ var pressedTime = 0.2 #in seconds, anti input frustration value
 var coyoteTimer = 10
 var jumpPressedTimer=10
 
-#Enemies
-
 var input_velocity = 0
-
-func ready():
-	global.player = self
-
 
 func _physics_process(delta):
 	input_velocity = 0
@@ -53,10 +47,9 @@ func movement(delta):
 		var normalized_speed = range_lerp(velocity.x, 0, global.player_max_speed.real_value, 0, 1)
 		var friction = friction_curve.interpolate(abs(normalized_speed)) * global.player_max_friction.real_value
 		velocity.x -= sign(velocity.x) * friction
-
+	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-
 	if is_on_floor() || global.player_fly.real_value:
 		coyoteTimer = 0
 		if jump_pressed:
@@ -95,3 +88,6 @@ func animate():
 func die():
 	if get_tree().reload_current_scene() != OK:
 		print_debug("An error occured while attempting to reload the current scene.")
+
+func knockback(amount, dir):
+	velocity += Vector2(amount, 0).rotated(dir.angle())
