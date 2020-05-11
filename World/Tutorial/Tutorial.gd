@@ -20,8 +20,8 @@ func _process(_delta):
 		
 		yield(dialogue_box, "finished")
 		
-		for i in range(10):
-			create_falling_tile($"Falling Tile Pos".position - Vector2(0, 80*i), 3)
+		for i in range(global.random_int(8, 12)):
+			create_falling_tile($"Falling Tile Pos".position - Vector2(0, 80*i), global.random_int(2, 5))
 
 func create_falling_tile(pos, width):
 	var falling_tile_instance = falling_tile.instance()
