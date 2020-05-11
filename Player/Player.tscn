@@ -1,62 +1,68 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://Player/Player Sprite Sheet.png" type="Texture" id=1]
+[ext_resource path="res://Player/Player Jump.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://UI/HUD/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Curves/Acc Curve.tres" type="Curve" id=4]
 [ext_resource path="res://Curves/Friction Curve.tres" type="Curve" id=5]
+[ext_resource path="res://Player/Player Fall.png" type="Texture" id=6]
+[ext_resource path="res://Player/Player Walk Sheet.png" type="Texture" id=7]
 
-[sub_resource type="Curve" id=28]
+[sub_resource type="Curve" id=1]
 max_value = 10.0
 _data = [ Vector2( 0, 0 ), 0.0, 6.36536, 0, 1, Vector2( 0.528428, 3.36364 ), 16.1622, 16.1622, 0, 0, Vector2( 1, 10 ), 14.0729, 0.0, 1, 0 ]
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 23, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
-region = Rect2( 46, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
-region = Rect2( 69, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 92, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 128, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 1 )
-region = Rect2( 115, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 160, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 1 )
-region = Rect2( 138, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 192, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 1 )
-region = Rect2( 161, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 224, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 1 )
-region = Rect2( 184, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 256, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 1 )
-region = Rect2( 207, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 288, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 1 )
-region = Rect2( 230, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 320, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 1 )
-region = Rect2( 253, 0, 23, 28 )
+atlas = ExtResource( 7 )
+region = Rect2( 352, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=14]
 animations = [ {
@@ -64,24 +70,40 @@ animations = [ {
 "loop": true,
 "name": "Walk",
 "speed": 18.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 18.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 18.0
+}, {
+"frames": [ SubResource( 28 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 18.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14, 20 )
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 20, 29 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 acc_curve = ExtResource( 4 )
 friction_curve = ExtResource( 5 )
-anim_speed_curve = SubResource( 28 )
+anim_speed_curve = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 2, 2 )
+scale = Vector2( 3, 3 )
 frames = SubResource( 14 )
-animation = "Walk"
+animation = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+position = Vector2( 0, 6 )
+shape = SubResource( 15 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

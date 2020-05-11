@@ -70,14 +70,25 @@ func movement(delta):
 	coyoteTimer+=delta
 
 func animate():
-	if input_velocity != 0 and abs(velocity.x) > 0:
+	var moving = abs(velocity.x) > 0
+	if moving:
+		anim_sprite.flip_h = velocity.x < 0
+	
+	if not is_on_floor():
+		if velocity.y > 0:
+			anim_sprite.play("Jump")
+		else:
+			anim_sprite.play("Fall")
+		
+		return
+	
+	if input_velocity != 0 and moving:
 		var speed_scale = anim_speed_curve.interpolate(abs(velocity.x)/1000)
 		anim_sprite.speed_scale = speed_scale
 		anim_sprite.frames.set_animation_loop("Walk", true)
 		anim_sprite.play("Walk")
-		anim_sprite.flip_h = velocity.x < 0
 	else:
-		anim_sprite.frames.set_animation_loop("Walk", false)
+		anim_sprite.play("Idle")
 
 func die():
 	if get_tree().reload_current_scene() != OK:
