@@ -6,19 +6,7 @@ var width
 
 func set_width(_width):
 	width = _width
-	
-	var tilemap = get_node("TileMap")
-	
-	for i in range(width):
-		if i == 0 and width == 1:
-			tilemap.set_cellv(Vector2(i, 0), global.tiles.TILE_SOLO)
-		else:
-			if i == 0:
-				tilemap.set_cellv(Vector2(i, 0), global.tiles.TILE_LEFT)
-			elif i == width - 1:
-				tilemap.set_cellv(Vector2(i, 0), global.tiles.TILE_RIGHT)
-			else:
-				tilemap.set_cellv(Vector2(i, 0), global.tiles.TILE_MIDDLE)
+	global.place_tiles(get_node("TileMap"), width)
 	
 	$CollisionShape2D.position = Vector2(32 * width, 32)
 	$CollisionShape2D.shape.extents.x = 32 * width
