@@ -8,7 +8,7 @@
 
 [sub_resource type="Curve" id=28]
 max_value = 10.0
-_data = [ Vector2( 0, 0 ), 0.0, 3.76101, 0, 1, Vector2( 0.531773, 2 ), 6.6118, 6.6118, 0, 0, Vector2( 1, 10 ), 17.0857, 0.0, 1, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 6.36536, 0, 1, Vector2( 0.528428, 3.36364 ), 16.1622, 16.1622, 0, 0, Vector2( 1, 10 ), 14.0729, 0.0, 1, 0 ]
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
