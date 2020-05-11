@@ -50,6 +50,7 @@ class gamevar:
 				if name == alias and gamevar.writable:
 					return gamevar
 
+#Commands
 onready var help_command = command.new("help", "Display a list of commands", 1)
 onready var variables_command = command.new("variables", "Display a list of variables", 1)
 onready var set_command = command.new("set", "Set a specified variable to another value", 3)
@@ -57,10 +58,18 @@ onready var get_command = command.new("get", "Return a specified variable", 2)
 onready var exit_command = command.new("exit", "Exit the hacking interface", 1)
 onready var restart_command = command.new("restart", "Restart the game", 1)
 
+#Game Vars
 onready var gravity = gamevar.new(["gravity"], "500", "Number", "The value of the gravity")
+
+#Player Vars
 onready var player_fly = gamevar.new(["player_fly"], "false", "True/False", "The player's ability to fly")
 onready var player_max_speed = gamevar.new(["player_max_speed", "player_speed"], "600", "Number", "The maximum speed at which the player can go")
 onready var player_max_acc = gamevar.new(["player_max_acc", "player_acc"], "70", "Number", "The maximum acceleration the player can be applying")
 onready var player_max_friction = gamevar.new(["player_max_friction", "player_friction"], "60", "Number", "The maximum friction that can be applied to the player")
 onready var player_jump_speed = gamevar.new(["player_jump_speed", "player_jump"], "200", "Number", "The speed (or force) applied to the player when jumping")
 onready var player_health = gamevar.new(["player_health"], "100", "Number", "The health that the player has")
+
+#Enemies Vars
+
+#Enemie1 Vars
+onready var enemie1_max_speed = gamevar.new(["enemie1_max_speed", "enemie1_speed"], "150", "Number", "The maximum speed at which the Enemie1 can go")
