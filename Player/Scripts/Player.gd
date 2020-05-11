@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+onready var raycast = get_node("RayCast2D")
+
 var velocity = Vector2()
 var can_walk = true #For checking if the player is moving
 var jump_pressed = false
@@ -52,8 +54,15 @@ func get_input():
 			velocity.y -= 10
 
 func movement(delta):
-	if not is_on_floor():
-		velocity.y += real_gravity * delta
+#	var grav = Vector2(0, real_gravity)
+#	var rot = 0
+#	if raycast.is_colliding():
+#		var normal = raycast.get_collision_normal()
+#		rot = normal.angle() + PI/2
+#		grav.rotated(rot)
+#	velocity += grav * delta
+	
+	velocity.y += real_gravity * delta
 	
 	# Friction
 	var normalized_speed = range_lerp(velocity.x, 0, real_max_speed, 0, 1)
@@ -62,9 +71,14 @@ func movement(delta):
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
+#	$Sprite.rotation = rot
+#	$CollisionShape2D.rotation = rot
+	
 	if is_on_floor():
 		coyoteTimer = 0
 		if jump_pressed:
+#			var e = Vector2(0, -real_jump_speed).rotated(rot)
+#			velocity += e
 			velocity.y -= real_jump_speed
 	
 	if jump_pressed:
