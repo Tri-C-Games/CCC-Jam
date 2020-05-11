@@ -54,10 +54,11 @@ __meta__ = {
 [node name="Increment Visible Characters Timer" type="Timer" parent="."]
 wait_time = 0.08
 
-[node name="Typing Pause Timer" type="Timer" parent="."]
+[node name="Next Dialogue Timer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 
-[node name="Disappear Timer" type="Timer" parent="."]
+[node name="Stop Dialogue Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
@@ -66,5 +67,5 @@ stream = ExtResource( 3 )
 volume_db = -15.0
 [connection signal="pressed" from="ColorRect/Button" to="." method="_on_Button_pressed"]
 [connection signal="timeout" from="Increment Visible Characters Timer" to="." method="_on_Increment_Visible_Characters_Timer_timeout"]
-[connection signal="timeout" from="Typing Pause Timer" to="." method="_on_Typing_Pause_Timer_timeout"]
-[connection signal="timeout" from="Disappear Timer" to="." method="_on_Disappear_Timer_timeout"]
+[connection signal="timeout" from="Next Dialogue Timer" to="." method="_on_Next_Dialogue_Timer_timeout"]
+[connection signal="timeout" from="Stop Dialogue Timer" to="." method="_on_Stop_Dialogue_Timer_timeout"]

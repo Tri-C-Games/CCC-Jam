@@ -4,8 +4,11 @@ signal finished
 
 onready var rich_text_label = get_node("ColorRect/RichTextLabel")
 onready var increment_timer = get_node("Increment Visible Characters Timer")
-onready var pause_timer = get_node("Typing Pause Timer")
-var dialog_buffer = []
+onready var next_dialogue_timer = get_node("Next Dialogue Timer")
+onready var stop_timer = get_node("Stop Dialogue Timer")
+onready var key_press_sfx = get_node("Key Press SFX")
+
+var dialogue_buffer = []
 
 var pausing_punctuation = {
 	"." : 0.5,
@@ -14,52 +17,63 @@ var pausing_punctuation = {
 	"," : 0.2
 }
 
-func start_dialogue(text):
-	rich_text_label.text = text
+func buffer_dialogue(text):
+	dialogue_buffer.append(text)
+
+func start_dialogue():
+	rich_text_label.text = dialogue_buffer[0]
 	rich_text_label.visible_characters = 0
 	visible = true
 	increment_timer.start()
 
 func _on_Increment_Visible_Characters_Timer_timeout():
-	rich_text_label.visible_characters += 1
-	$"Key Press SFX".play()
-	var new_char = rich_text_label.text[rich_text_label.visible_characters - 1]
-	
 	if rich_text_label.visible_characters == rich_text_label.get_total_character_count():
-		stop_incrementing()
-		return
-	
-	if new_char in pausing_punctuation.keys():
-		pause_typing(pausing_punctuation[new_char])
+		dialogue_buffer.erase(dialogue_buffer[0])
+		
+		if dialogue_buffer.size() == 0:
+			stop_dialogue()
+		else:
+			increment_timer.paused = true
+			next_dialogue_timer.start()
+	else:
+		rich_text_label.visible_characters += 1
+		key_press_sfx.play()
+		var new_char = rich_text_label.text[rich_text_label.visible_characters - 1]
+		
+		if new_char in pausing_punctuation.keys():
+			pause_typing(pausing_punctuation[new_char])
 
 func pause_typing(duration):
 	# Duration is in seconds.
+	increment_timer.paused = true
+	yield(get_tree().create_timer(duration), "timeout")
+	increment_timer.paused = false
+
+func _on_Next_Dialogue_Timer_timeout():
+	set_next_dialogue()
+
+func set_next_dialogue():
+	increment_timer.paused = false
+	rich_text_label.text = dialogue_buffer[0]
+	rich_text_label.visible_characters = 0
+
+func stop_dialogue():
 	increment_timer.stop()
-	pause_timer.wait_time = duration
-	pause_timer.start()
+	stop_timer.start()
 
-func buffer_dialogue(text):
-	dialog_buffer.push_back(text)
-
-func _on_Typing_Pause_Timer_timeout():
-	increment_timer.start()
-
-func stop_incrementing():
-	increment_timer.stop()
-	$"Disappear Timer".start()
-
-func _on_Disappear_Timer_timeout():
-	if dialog_buffer:
-		start_dialogue(dialog_buffer[0])
-		dialog_buffer.erase(dialog_buffer[0])
-		return
-	
+func kill_dialogue():
 	visible = false
 	emit_signal("finished")
 
+func _on_Stop_Dialogue_Timer_timeout():
+	kill_dialogue()
+
 func _on_Button_pressed():
-	rich_text_label.visible_characters = rich_text_label.get_total_character_count()
-	stop_incrementing()
-	if dialog_buffer:
-		start_dialogue(dialog_buffer[0])
-		dialog_buffer.erase(dialog_buffer[0])
+	if rich_text_label.visible_characters == rich_text_label.get_total_character_count():
+		if dialogue_buffer.size() == 0:
+			kill_dialogue()
+		else:
+			set_next_dialogue()
+	else:
+		rich_text_label.visible_characters = rich_text_label.get_total_character_count()
+		key_press_sfx.play()
