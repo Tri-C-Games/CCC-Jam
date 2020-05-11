@@ -20,3 +20,7 @@ shape = SubResource( 1 )
 current = true
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 80 )

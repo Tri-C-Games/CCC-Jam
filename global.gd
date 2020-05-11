@@ -21,40 +21,34 @@ class command:
 
 class gamevar:
 	var aliases
-	var value:String
-	var type
+	var value:String setget set_real_value
+	var real_value
+	var type:String
 	var description:String
-	var writable:bool#: bool=true # Already set to true by default in the init.
+	var writable:bool
 	
-	func _init(_aliases = [], _value = "", _type = "String", _description = "", _writable = true):
+	func _init(_aliases = [], _value = "", _type = "Number", _description = "", _writable = true):
 		self.aliases = _aliases
-		self.value = _value
 		self.type = _type
+		self.value = _value
 		self.description = _description
 		self.writable = _writable
 		global.gamevars_list.append(self)
+	
+	func set_real_value(_val):
+		value = _val
+		# TODO - Could be cool to add some sort of in game effect if the player inputs the wrong value.
+		match self.type:
+			"Number":
+				self.real_value = float(value) if value.is_valid_float() else 0.0
+			"True/False":
+				self.real_value = true if value == "true" else false
 	
 	static func get_gamevar(name):
 		for gamevar in global.gamevars_list:
 			for alias in gamevar.aliases:
 				if name == alias and gamevar.writable:
 					return gamevar
-
-#func gamevar(var value:String="", var description:String="", var writable:bool=true):
-#	var variable=gamevar.new()
-#	variable.value=value
-#	variable.description=description
-#	variable.writable=writable
-#	#variable.writable=writable # No need for two.
-#	return variable
-
-#var gravity : gamevar
-#var player_fly : gamevar
-#var player_max_speed : gamevar
-#var player_max_acc : gamevar
-#var player_max_friction : gamevar
-#var player_jump_speed : gamevar
-#var player_health : gamevar
 
 onready var help_command = command.new("help", "Display a list of commands", 1)
 onready var variables_command = command.new("variables", "Display a list of variables", 1)
@@ -70,12 +64,3 @@ onready var player_max_acc = gamevar.new(["player_max_acc", "player_acc"], "70",
 onready var player_max_friction = gamevar.new(["player_max_friction", "player_friction"], "60", "Number", "The maximum friction that can be applied to the player")
 onready var player_jump_speed = gamevar.new(["player_jump_speed", "player_jump"], "200", "Number", "The speed (or force) applied to the player when jumping")
 onready var player_health = gamevar.new(["player_health"], "100", "Number", "The health that the player has")
-
-#func _init():
-#	gravity= gamevar("500", "The value of the gravity")
-#	player_fly= gamevar("false", "The player's ability to fly")
-#	player_max_speed= gamevar("600", "The maximum speed at which the player can go")
-#	player_max_acc= gamevar("70", "The maximum acceleration the player can be applying")
-#	player_max_friction= gamevar("60","The maximum friction that can be applied to the player")
-#	player_jump_speed=gamevar("200", "The speed (or force) applied to the player when jumping")
-#	player_health=gamevar("100", "The health that the player has")

@@ -12,20 +12,7 @@ var pressedTime = 0.2 #in seconds, anti input frustration value
 var coyoteTimer = 10
 var jumpPressedTimer=10
 
-var real_gravity
-var real_jump_speed
-var real_max_speed
-var real_max_acc
-var real_max_friction
-
 func _physics_process(delta):
-	# TODO - Could be cool to add some sort of in game effect if the player inputs a string.
-	real_gravity = float(global.gravity.value) if global.gravity.value.is_valid_float() else 0.0
-	real_jump_speed = float(global.player_jump_speed.value) if global.player_jump_speed.value.is_valid_float() else 0.0
-	real_max_speed = float(global.player_max_speed.value) if global.player_max_speed.value.is_valid_float() else 0.0
-	real_max_acc = float(global.player_max_acc.value) if global.player_max_acc.value.is_valid_float() else 0.0
-	real_max_friction = float(global.player_max_friction.value) if global.player_max_friction.value.is_valid_float() else 0.0
-	
 	get_input()
 	movement(delta)
 	animate()
@@ -38,8 +25,8 @@ func get_input():
 	if Input.is_action_pressed("move_left"):
 		input_velocity -= 1
 	
-	var normalized_speed = range_lerp(velocity.x, 0, real_max_speed, 0, 1)
-	var acc = acc_curve.interpolate(abs(normalized_speed)) * real_max_acc
+	var normalized_speed = range_lerp(velocity.x, 0, global.player_max_speed.real_value, 0, 1)
+	var acc = acc_curve.interpolate(abs(normalized_speed)) * global.player_max_acc.real_value
 	velocity.x += input_velocity * acc
 	
 	jump_pressed = false
@@ -52,12 +39,11 @@ func get_input():
 			velocity.y -= 10
 
 func movement(delta):
-	if not is_on_floor():
-		velocity.y += real_gravity * delta
+	velocity.y += global.gravity.real_value * delta
 	
 	# Friction
-	var normalized_speed = range_lerp(velocity.x, 0, real_max_speed, 0, 1)
-	var friction = friction_curve.interpolate(abs(normalized_speed)) * real_max_friction
+	var normalized_speed = range_lerp(velocity.x, 0, global.player_max_speed.real_value, 0, 1)
+	var friction = friction_curve.interpolate(abs(normalized_speed)) * global.player_max_friction.real_value
 	velocity.x -= sign(velocity.x) * friction
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
@@ -65,12 +51,12 @@ func movement(delta):
 	if is_on_floor():
 		coyoteTimer = 0
 		if jump_pressed:
-			velocity.y -= real_jump_speed
+			velocity.y -= global.player_jump_speed.real_value
 	
 	if jump_pressed:
 		jumpPressedTimer=0
 	if coyoteTimer<=coyoteTime and jumpPressedTimer<=pressedTime:
-		velocity.y -= real_jump_speed
+		velocity.y -= global.player_jump_speed.real_value
 		jumpPressedTimer=1000
 		coyoteTimer=1000
 	jumpPressedTimer+=delta
