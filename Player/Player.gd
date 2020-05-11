@@ -15,7 +15,13 @@ var pressedTime = 0.2 #in seconds, anti input frustration value
 var coyoteTimer = 10
 var jumpPressedTimer=10
 
+#Enemies
+
 var input_velocity = 0
+
+func ready():
+	global.player = self
+
 
 func _physics_process(delta):
 	input_velocity = 0
@@ -50,6 +56,7 @@ func movement(delta):
 
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
+
 	if is_on_floor() || global.player_fly.real_value:
 		coyoteTimer = 0
 		if jump_pressed:

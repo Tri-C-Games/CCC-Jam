@@ -9,6 +9,8 @@ enum tiles {
 
 var commands_list = []
 var gamevars_list = []
+var player
+
 
 class command:
 	var name:String
