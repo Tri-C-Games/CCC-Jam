@@ -1,25 +1,30 @@
 extends KinematicBody2D
 
+onready var anim_sprite = get_node("AnimatedSprite")
+
 var velocity = Vector2()
 var can_walk = true #For checking if the player is moving
 var jump_pressed = false
 
 export (Curve) var acc_curve
 export (Curve) var friction_curve
+export (Curve) var anim_speed_curve
 
 var coyoteTime = 0;#in seconds
 var pressedTime = 0.2 #in seconds, anti input frustration value
 var coyoteTimer = 10
 var jumpPressedTimer=10
 
+var input_velocity = 0
+
 func _physics_process(delta):
+	input_velocity = 0
 	get_input()
 	movement(delta)
 	animate()
 
 func get_input():
 	# Movement
-	var input_velocity = 0
 	if Input.is_action_pressed("move_right"):
 		input_velocity += 1
 	if Input.is_action_pressed("move_left"):
@@ -65,8 +70,14 @@ func movement(delta):
 	coyoteTimer+=delta
 
 func animate():
-	# TODO
-	pass
+	if input_velocity != 0 and abs(velocity.x) > 0:
+		var speed_scale = anim_speed_curve.interpolate(abs(velocity.x)/1000)
+		anim_sprite.speed_scale = speed_scale
+		anim_sprite.frames.set_animation_loop("Walk", true)
+		anim_sprite.play("Walk")
+		anim_sprite.flip_h = velocity.x < 0
+	else:
+		anim_sprite.frames.set_animation_loop("Walk", false)
 
 func die():
 	if get_tree().reload_current_scene() != OK:
