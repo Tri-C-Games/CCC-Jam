@@ -17,10 +17,11 @@ func _process(_delta):
 		
 		yield(dialogue_box, "finished")
 		
-		create_falling_tile($"Falling Tile".position, 2)
+		for i in range(10):
+			create_falling_tile($"Falling Tile Pos".position - Vector2(0, 80*i), 3)
 
 func create_falling_tile(pos, width):
 	var falling_tile_instance = falling_tile.instance()
 	falling_tile_instance.position = pos
 	falling_tile_instance.set_width(width)
-	add_child(falling_tile_instance)
+	$"Falling Tiles".add_child(falling_tile_instance)

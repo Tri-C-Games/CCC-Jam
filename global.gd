@@ -1,5 +1,12 @@
 extends Node
 
+enum tiles {
+	TILE_SOLO = 3
+	TILE_LEFT = 7,
+	TILE_MIDDLE = 8,
+	TILE_RIGHT = 9
+}
+
 var commands_list = []
 var gamevars_list = []
 
