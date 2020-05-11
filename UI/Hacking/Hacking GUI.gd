@@ -33,7 +33,7 @@ func parse_command(text):
 			var variable_str = separated_command[1].to_lower()
 			var variable = global.gamevar.get_gamevar(variable_str)
 			if not variable:
-				console.output_error(not_recognised_text % variable)
+				console.output_error(not_recognised_text % variable_str)
 				return
 			
 			var new_value = separated_command[2].to_lower()
@@ -44,7 +44,7 @@ func parse_command(text):
 			var variable_str = separated_command[1].to_lower()
 			var variable = global.gamevar.get_gamevar(variable_str)
 			if not variable:
-				console.output_error(not_recognised_text % variable)
+				console.output_error(not_recognised_text % variable_str)
 				return
 			
 			console.output_text(variable.value, false)

@@ -25,9 +25,10 @@ func get_input():
 	if Input.is_action_pressed("move_left"):
 		input_velocity -= 1
 	
-	var normalized_speed = range_lerp(velocity.x, 0, global.player_max_speed.real_value, 0, 1)
-	var acc = acc_curve.interpolate(abs(normalized_speed)) * global.player_max_acc.real_value
-	velocity.x += input_velocity * acc
+	if global.player_max_speed.real_value != 0:
+		var normalized_speed = range_lerp(velocity.x, 0, global.player_max_speed.real_value, 0, 1)
+		var acc = acc_curve.interpolate(abs(normalized_speed)) * global.player_max_acc.real_value
+		velocity.x += input_velocity * acc
 	
 	jump_pressed = false
 	if global.player_fly.value == "false":
@@ -42,10 +43,11 @@ func movement(delta):
 	velocity.y += global.gravity.real_value * delta
 	
 	# Friction
-	var normalized_speed = range_lerp(velocity.x, 0, global.player_max_speed.real_value, 0, 1)
-	var friction = friction_curve.interpolate(abs(normalized_speed)) * global.player_max_friction.real_value
-	velocity.x -= sign(velocity.x) * friction
-	
+	if global.player_max_speed.real_value != 0:
+		var normalized_speed = range_lerp(velocity.x, 0, global.player_max_speed.real_value, 0, 1)
+		var friction = friction_curve.interpolate(abs(normalized_speed)) * global.player_max_friction.real_value
+		velocity.x -= sign(velocity.x) * friction
+
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	if is_on_floor():
@@ -65,3 +67,7 @@ func movement(delta):
 func animate():
 	# TODO
 	pass
+
+func die():
+	if get_tree().reload_current_scene() != OK:
+		print_debug("An error occured while attempting to reload the current scene.")

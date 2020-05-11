@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Enemies/Enemie1/Weakness/Weakness.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/Enemie1/Enemie1.gd" type="Script" id=3]
 
@@ -8,7 +7,7 @@
 extents = Vector2( 33.408, 20.4334 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 25.7503, 10.7499 )
+extents = Vector2( 30, 12 )
 
 [node name="Enemie1" type="KinematicBody2D"]
 script = ExtResource( 3 )
@@ -21,14 +20,14 @@ texture = ExtResource( 2 )
 position = Vector2( 0, 11.5355 )
 shape = SubResource( 1 )
 
-[node name="Weakness" type="KinematicBody2D" parent="."]
-script = ExtResource( 1 )
+[node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Weakness"]
-position = Vector2( 0, -21.25 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -21 )
 shape = SubResource( 2 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 32, 0 )
 enabled = true
 cast_to = Vector2( 0, 35 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
