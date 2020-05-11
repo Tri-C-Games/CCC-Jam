@@ -7,6 +7,9 @@ onready var dialogue_box = player.get_node("HUD/Dialogue Box")
 
 var received_first_dialogue = false
 
+func _ready():
+	randomize()
+
 func _process(_delta):
 	if not received_first_dialogue and player.position.x >= 1100:
 		received_first_dialogue = true
