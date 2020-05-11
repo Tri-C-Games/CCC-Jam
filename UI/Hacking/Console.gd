@@ -12,7 +12,8 @@ func _ready():
 func _on_Input_text_entered(new_text):
 	input.clear()
 	output_text(new_text, true)
-	emit_signal("command_entered", new_text)
+	if new_text.replace(" ", "") != "":
+		emit_signal("command_entered", new_text)
 
 func output_text(text, from_user):
 	output.bbcode_text = str(output.bbcode_text, "\n", "[color=red]root@game[color=white]:[color=#33cfff]~[color=greenConsole]# " if from_user else "", text)
