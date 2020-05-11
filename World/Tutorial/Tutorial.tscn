@@ -514,7 +514,7 @@ position = Vector2( 1856, -704 )
 [node name="Falling Tiles" type="Node2D" parent="."]
 
 [node name="Enemie1" parent="." instance=ExtResource( 5 )]
-position = Vector2( 528, -232 )
+position = Vector2( 433.664, -234.043 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 light_mask = 3
