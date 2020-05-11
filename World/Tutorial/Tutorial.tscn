@@ -524,6 +524,5 @@ position = Vector2( 416, -224 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 light_mask = 3
-position = Vector2( 1176, -256 )
 acc_curve = SubResource( 36 )
 friction_curve = SubResource( 37 )
