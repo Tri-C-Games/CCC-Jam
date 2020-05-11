@@ -3,6 +3,7 @@ extends ColorRect
 onready var rich_text_label = get_node("ColorRect/RichTextLabel")
 onready var increment_timer = get_node("Increment Visible Characters Timer")
 onready var pause_timer = get_node("Typing Pause Timer")
+var dialog_buffer=[]
 
 var sentence_ending_punctuation = [".", "!", "?"]
 
@@ -30,6 +31,9 @@ func pause_typing(duration):
 	pause_timer.wait_time = duration
 	pause_timer.start()
 
+func buffer_dialogue(text):
+	dialog_buffer.push_back(text)
+
 func _on_Typing_Pause_Timer_timeout():
 	increment_timer.start()
 
@@ -39,3 +43,6 @@ func stop_incrementing():
 
 func _on_Disappear_Timer_timeout():
 	visible = false
+	if dialog_buffer:
+		start_dialogue(dialog_buffer[0])
+		dialog_buffer.erase(dialog_buffer[0])
