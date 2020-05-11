@@ -70,7 +70,7 @@ func animate():
 		anim_sprite.flip_h = velocity.x < 0
 	
 	if not is_on_floor():
-		if velocity.y > 0:
+		if velocity.y < 0:
 			anim_sprite.play("Jump")
 		else:
 			anim_sprite.play("Fall")
