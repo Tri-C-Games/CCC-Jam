@@ -5,7 +5,12 @@ onready var increment_timer = get_node("Increment Visible Characters Timer")
 onready var pause_timer = get_node("Typing Pause Timer")
 var dialog_buffer = []
 
-var sentence_ending_punctuation = [".", "!", "?"]
+var pausing_punctuation = {
+	"." : 0.5,
+	"!" : 0.5,
+	"?" : 0.5,
+	"," : 0.2
+}
 
 func start_dialogue(text):
 	rich_text_label.text = text
@@ -22,8 +27,8 @@ func _on_Increment_Visible_Characters_Timer_timeout():
 		stop_incrementing()
 		return
 	
-	if new_char in sentence_ending_punctuation:
-		pause_typing(0.5)
+	if new_char in pausing_punctuation.keys():
+		pause_typing(pausing_punctuation[new_char])
 
 func pause_typing(duration):
 	# Duration is in seconds.
@@ -42,6 +47,11 @@ func stop_incrementing():
 	$"Disappear Timer".start()
 
 func _on_Disappear_Timer_timeout():
+	if dialog_buffer:
+		start_dialogue(dialog_buffer[0])
+		dialog_buffer.erase(dialog_buffer[0])
+		return
+	
 	visible = false
 
 func _on_Button_pressed():
