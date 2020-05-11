@@ -71,7 +71,6 @@ radius = 17.0
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 0.647059, 0.12549, 0.12549, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 13 )
 animation = "Walk"
