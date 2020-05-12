@@ -94,18 +94,18 @@ onready var enemie1_max_speed = gamevar.new(["enemie1_max_speed", "enemie1_speed
 func random_int(minimum, maximum):
 	return range(minimum, maximum)[randi() % range(minimum, maximum).size()]
 
-#func place_tiles(tilemap, width, base_pos = Vector2.ZERO):
-#	for i in range(width):
-#		var final_pos = base_pos + Vector2(i, 0)
-#		if width == 1:
-#			tilemap.set_cellv(final_pos, global.tiles.TILE_SOLO)
-#		else:
-#			if i == 0:
-#				tilemap.set_cellv(final_pos, global.tiles.TILE_LEFT)
-#			elif i == width - 1:
-#				tilemap.set_cellv(final_pos, global.tiles.TILE_RIGHT)
-#			else:
-#				tilemap.set_cellv(final_pos, global.tiles.TILE_MIDDLE)
+func place_tiles(tilemap, width, base_pos = Vector2.ZERO):
+	for i in range(width):
+		var final_pos = base_pos + Vector2(i, 0)
+		if width == 1:
+			tilemap.set_cellv(final_pos, global.tiles.TILE_SOLO)
+		else:
+			if i == 0:
+				tilemap.set_cellv(final_pos, global.tiles.TILE_LEFT_TOP)
+			elif i == width - 1:
+				tilemap.set_cellv(final_pos, global.tiles.TILE_RIGHT_TOP)
+			else:
+				tilemap.set_cellv(final_pos, global.tiles.TILE_MIDDLE_TOP)
 func make_stack(tilemap, width, height, base_pos= Vector2.ZERO):
 	for i in range(height):
 		var final_y_pos = base_pos + Vector2(0, i)
