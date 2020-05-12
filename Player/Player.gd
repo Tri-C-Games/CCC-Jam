@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var anim_sprite = get_node("AnimatedSprite")
+onready var raycasts = [get_node("Left RayCast"), get_node("Middle RayCast"), get_node("Right RayCast")]
 
 var velocity = Vector2()
 var can_walk = true #For checking if the player is moving
@@ -84,10 +85,36 @@ func animate():
 		anim_sprite.play("Walk")
 	else:
 		anim_sprite.play("Idle")
+	
+	# If the player is on a slope.
+#	if $"RayCasts/Middle RayCast".is_colliding() && $"RayCasts/Left RayCast".is_colliding() && $"RayCasts/Right RayCast".is_colliding():
+#		for i in get_slide_count():
+#			var collision = get_slide_collision(i)
+#			print(i)
+	#print($"RayCasts/Middle RayCast".get_collision_normal())
+	
+	var normal = all_raycasts_on_slope()
+	if normal:
+		$AnimatedSprite.rotation = normal.angle() + PI/2
 
 func die():
 	if get_tree().reload_current_scene() != OK:
 		print_debug("An error occured while attempting to reload the current scene.")
+
+func any_raycast_colliding():
+	for raycast in raycasts:
+		if raycast.is_colliding():
+			return true
+	return false
+
+func all_raycasts_on_slope():
+	var normal = Vector2.ZERO
+	for raycast in raycasts:
+		var n = raycast.get_collision_normal()
+		if n != normal && normal != Vector2.ZERO:
+			return false
+		normal = n
+	return normal
 
 func knockback(amount, dir):
 	velocity += Vector2(amount, 0).rotated(dir.angle())
