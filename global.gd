@@ -1,11 +1,18 @@
 extends Node
 
 enum tiles {
-	TILE_SOLO = 3
-	TILE_LEFT = 7,
-	TILE_MIDDLE = 8,
-	TILE_RIGHT = 9
-	TILE_FILLING
+	TILE_SOLO = 19,
+	TILE_LEFT_TOP = 10,
+	TILE_MIDDLE_TOP = 11,
+	TILE_RIGHT_TOP = 12,
+	TILE_FILLING = 14,
+	TILE_FILLING_LEFT=13,
+	TILE_FILLING_RIGHT=15,
+	TILE_FILLING_SOLO=20,
+	TILE_CAP_SOLO=21,
+	TILE_CAP_MIDDLE=17,
+	TILE_CAP_RIGHT=16,
+	TILE_CAP_LEFT=18
 }
 
 var commands_list = []
@@ -87,15 +94,79 @@ onready var enemie1_max_speed = gamevar.new(["enemie1_max_speed", "enemie1_speed
 func random_int(minimum, maximum):
 	return range(minimum, maximum)[randi() % range(minimum, maximum).size()]
 
-func place_tiles(tilemap, width, base_pos = Vector2.ZERO):
-	for i in range(width):
-		var final_pos = base_pos + Vector2(i, 0)
-		if width == 1:
-			tilemap.set_cellv(final_pos, global.tiles.TILE_SOLO)
+#func place_tiles(tilemap, width, base_pos = Vector2.ZERO):
+#	for i in range(width):
+#		var final_pos = base_pos + Vector2(i, 0)
+#		if width == 1:
+#			tilemap.set_cellv(final_pos, global.tiles.TILE_SOLO)
+#		else:
+#			if i == 0:
+#				tilemap.set_cellv(final_pos, global.tiles.TILE_LEFT)
+#			elif i == width - 1:
+#				tilemap.set_cellv(final_pos, global.tiles.TILE_RIGHT)
+#			else:
+#				tilemap.set_cellv(final_pos, global.tiles.TILE_MIDDLE)
+func make_stack(tilemap, width, height, base_pos= Vector2.ZERO):
+	for i in range(height):
+		var final_y_pos = base_pos + Vector2(0, i)
+		if width==1:
+			for i in range(width):
+				var final_pos = base_pos + Vector2(i, 0)
+				if width == 1:
+					tilemap.set_cellv(final_pos, global.tiles.TILE_CAP_SOLO)
+				else:
+					if i == 0:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_CAP_LEFT)
+					elif i == width - 1:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_CAP_RIGHT)
+					else:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_CAP_MIDDLE)
+			final_y_pos+=1
+			for i in range(width):
+				var final_pos = base_pos + Vector2(i, 0)
+				if width == 1:
+					tilemap.set_cellv(final_pos, global.tiles.TILE_SOLO)
+				else:
+					if i == 0:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_LEFT_TOP)
+					elif i == width - 1:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_RIGHT_TOP)
+					else:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_MIDDLE_TOP)
+		elif i== 0:
+			for i in range(width):
+				var final_pos = base_pos + Vector2(i, 0)
+				if width == 1:
+					tilemap.set_cellv(final_pos, global.tiles.TILE_CAP_SOLO)
+				else:
+					if i == 0:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_CAP_LEFT)
+					elif i == width - 1:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_CAP_RIGHT)
+					else:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_CAP_MIDDLE)
+		elif i==height-1:
+			for i in range(width):
+				var final_pos = base_pos + Vector2(i, 0)
+				if width == 1:
+					tilemap.set_cellv(final_pos, global.tiles.TILE_SOLO)
+				else:
+					if i == 0:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_LEFT_TOP)
+					elif i == width - 1:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_RIGHT_TOP)
+					else:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_MIDDLE_TOP)
 		else:
-			if i == 0:
-				tilemap.set_cellv(final_pos, global.tiles.TILE_LEFT)
-			elif i == width - 1:
-				tilemap.set_cellv(final_pos, global.tiles.TILE_RIGHT)
-			else:
-				tilemap.set_cellv(final_pos, global.tiles.TILE_MIDDLE)
+			for i in range(width):
+				var final_pos = base_pos + Vector2(i, 0)
+				if width == 1:
+					tilemap.set_cellv(final_pos, global.tiles.TILE_FILLING_SOLO)
+				else:
+					if i == 0:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_FILLING_LEFT)
+					elif i == width - 1:
+						tilemap.set_cellv(final_pos, global.tiles.TILE_FILLING_RIGHT)
+					else:
+						tilemap.set_cellv(final_pos, global.tiles.TILLE_FILLING_MIDDLE)
+			
