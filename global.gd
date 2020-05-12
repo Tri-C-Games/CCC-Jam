@@ -106,7 +106,7 @@ func random_int(minimum, maximum):
 #				tilemap.set_cellv(final_pos, global.tiles.TILE_RIGHT)
 #			else:
 #				tilemap.set_cellv(final_pos, global.tiles.TILE_MIDDLE)
-func make_stack(tilemap, width, height, base_pos= Vector2.ZERO):
+func make_stack(tilemap, width:int, height:int, base_pos= Vector2.ZERO):
 	for i in range(height):
 		var final_y_pos = base_pos + Vector2(0, i)
 		if width==1:
@@ -168,5 +168,5 @@ func make_stack(tilemap, width, height, base_pos= Vector2.ZERO):
 					elif i == width - 1:
 						tilemap.set_cellv(final_pos, global.tiles.TILE_FILLING_RIGHT)
 					else:
-						tilemap.set_cellv(final_pos, global.tiles.TILLE_FILLING_MIDDLE)
+						tilemap.set_cellv(final_pos, global.tiles.TILE_FILLING)
 			

@@ -7,6 +7,7 @@ var height
 
 func set_width(_width, _height):
 	width = _width	
+	height=_height
 	global.make_stack(get_node("TileMap"), width, height)
 	
 	$CollisionShape2D.position = Vector2(32 * width, 32)
