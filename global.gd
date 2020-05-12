@@ -5,6 +5,7 @@ enum tiles {
 	TILE_LEFT = 7,
 	TILE_MIDDLE = 8,
 	TILE_RIGHT = 9
+	TILE_FILLING
 }
 
 var commands_list = []
