@@ -66,15 +66,15 @@ onready var exit_command = command.new("exit", "Exit the hacking interface", 1)
 onready var restart_command = command.new("restart", "Restart the game", 1)
 
 #Game Vars
-onready var gravity = gamevar.new(["gravity"], "500", "Number", "The value of the gravity")
+onready var gravity = gamevar.new(["gravity"], "1600", "Number", "The value of the gravity")
 
 #Player Vars
 onready var player_fly = gamevar.new(["player_fly", "fly"], "false", "True/False", "The player's ability to fly")
 onready var player_fly_speed = gamevar.new(["player_fly_speed", "fly_speed"], "50", "Number", "How fast the player flies")
-onready var player_max_speed = gamevar.new(["player_max_speed", "player_speed", "speed"], "600", "Number", "The maximum speed at which the player can go")
+onready var player_max_speed = gamevar.new(["player_max_speed", "player_speed", "speed"], "700", "Number", "The maximum speed at which the player can go")
 onready var player_max_acc = gamevar.new(["player_max_acc", "player_acc", "acc"], "70", "Number", "The maximum acceleration the player can be applying")
 onready var player_max_friction = gamevar.new(["player_max_friction", "player_friction", "friction"], "60", "Number", "The maximum friction that can be applied to the player")
-onready var player_jump_speed = gamevar.new(["player_jump_speed", "player_jump", "jump"], "200", "Number", "The speed (or force) applied to the player when jumping")
+onready var player_jump_speed = gamevar.new(["player_jump_speed", "player_jump", "jump"], "500", "Number", "The speed (or force) applied to the player when jumping")
 onready var player_health = gamevar.new(["player_health", "health", "hp"], "100", "Number", "The health that the player has")
 onready var player_damage_bounce = gamevar.new(["player_damage_bounce", "damage_bounce", "bounce"], "500", "Number", "The amount of knockback the player receives when the player kills an enemy")
 

@@ -66,14 +66,14 @@ region = Rect2( 352, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=15]
 animations = [ {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "Fall",
-"speed": 18.0
-}, {
 "frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "Idle",
+"speed": 18.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Jump",
 "speed": 18.0
 }, {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
@@ -81,9 +81,9 @@ animations = [ {
 "name": "Walk",
 "speed": 18.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "Jump",
+"name": "Fall",
 "speed": 18.0
 } ]
 
