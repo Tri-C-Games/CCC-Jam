@@ -43,7 +43,8 @@ func get_input():
 		jump_pressed = true
 
 func movement(delta):
-	velocity.y += global.gravity.real_value * delta
+	if not is_on_floor() and global.gravity.real_value > 0:
+		velocity.y += global.gravity.real_value * delta
 	
 	# Friction
 	if global.player_max_speed.real_value != 0:
@@ -72,7 +73,13 @@ func animate():
 	if moving:
 		anim_sprite.flip_h = velocity.x < 0
 	
-	if not any_raycast_colliding():
+	var normal = get_average_normal()
+	if normal != Vector2.ZERO:
+		anim_sprite.rotation = normal.angle() + TAU/4
+	else:
+		anim_sprite.rotation = lerp(anim_sprite.rotation, 0, 0.2)
+	
+	if not any_raycasts_colliding():
 		if velocity.y < 0:
 			anim_sprite.play("Jump")
 		else:
@@ -87,23 +94,27 @@ func animate():
 		anim_sprite.play("Walk")
 	else:
 		anim_sprite.play("Idle")
-	
-	var normal = get_average_normal()
-	var angle = normal.angle() + TAU/4
-	anim_sprite.rotation = angle
 
 func die():
 	if get_tree().reload_current_scene() != OK:
 		print_debug("An error occured while attempting to reload the current scene.")
 
-func any_raycast_colliding():
+func any_raycasts_colliding():
 	for raycast in raycasts:
 		if raycast.is_colliding():
 			return true
 	return false
 
+func all_raycasts_colliding():
+	for raycast in raycasts:
+		if not raycast.is_colliding():
+			return false
+	return true
+
 func get_average_normal():
-	return (left_raycast.get_collision_normal() + middle_raycast.get_collision_normal() + right_raycast.get_collision_normal())/3
+	if all_raycasts_colliding():
+		return (left_raycast.get_collision_normal() + middle_raycast.get_collision_normal() + right_raycast.get_collision_normal())/3
+	return Vector2.ZERO
 
 func knockback(amount, dir):
 	velocity += Vector2(amount, 0).rotated(dir.angle())
