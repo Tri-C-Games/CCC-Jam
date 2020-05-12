@@ -1,10 +1,12 @@
 extends KinematicBody2D
 
 onready var anim_sprite = get_node("AnimatedSprite")
-onready var raycasts = [get_node("Left RayCast"), get_node("Middle RayCast"), get_node("Right RayCast")]
+onready var left_raycast = get_node("Left RayCast")
+onready var middle_raycast = get_node("Middle RayCast")
+onready var right_raycast = get_node("Right RayCast")
+onready var raycasts = [left_raycast, middle_raycast, right_raycast]
 
 var velocity = Vector2()
-var can_walk = true #For checking if the player is moving
 var jump_pressed = false
 
 export (Curve) var acc_curve
@@ -70,7 +72,7 @@ func animate():
 	if moving:
 		anim_sprite.flip_h = velocity.x < 0
 	
-	if not is_on_floor():
+	if not any_raycast_colliding():
 		if velocity.y < 0:
 			anim_sprite.play("Jump")
 		else:
@@ -86,16 +88,9 @@ func animate():
 	else:
 		anim_sprite.play("Idle")
 	
-	# If the player is on a slope.
-#	if $"RayCasts/Middle RayCast".is_colliding() && $"RayCasts/Left RayCast".is_colliding() && $"RayCasts/Right RayCast".is_colliding():
-#		for i in get_slide_count():
-#			var collision = get_slide_collision(i)
-#			print(i)
-	#print($"RayCasts/Middle RayCast".get_collision_normal())
-	
-	var normal = all_raycasts_on_slope()
-	if normal:
-		$AnimatedSprite.rotation = normal.angle() + PI/2
+	var normal = get_average_normal()
+	var angle = normal.angle() + TAU/4
+	anim_sprite.rotation = angle
 
 func die():
 	if get_tree().reload_current_scene() != OK:
@@ -107,14 +102,8 @@ func any_raycast_colliding():
 			return true
 	return false
 
-func all_raycasts_on_slope():
-	var normal = Vector2.ZERO
-	for raycast in raycasts:
-		var n = raycast.get_collision_normal()
-		if n != normal && normal != Vector2.ZERO:
-			return false
-		normal = n
-	return normal
+func get_average_normal():
+	return (left_raycast.get_collision_normal() + middle_raycast.get_collision_normal() + right_raycast.get_collision_normal())/3
 
 func knockback(amount, dir):
 	velocity += Vector2(amount, 0).rotated(dir.angle())
