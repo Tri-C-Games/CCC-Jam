@@ -6,7 +6,7 @@ var width
 var height
 
 func set_width(_width, _height):
-	width = _width	
+	width = _width
 	height=_height
 	global.make_stack(get_node("TileMap"), width, height)
 	

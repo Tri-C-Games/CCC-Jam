@@ -169,4 +169,3 @@ func make_stack(tilemap, width:int, height:int, base_pos= Vector2.ZERO):
 						tilemap.set_cellv(final_pos, global.tiles.TILE_FILLING_RIGHT)
 					else:
 						tilemap.set_cellv(final_pos, global.tiles.TILE_FILLING)
-			

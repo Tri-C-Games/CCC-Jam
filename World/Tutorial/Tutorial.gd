@@ -11,7 +11,7 @@ func _ready():
 	randomize()
 
 func _process(_delta):
-	if not received_first_dialogue and player.position.x >= 1100:
+	if not received_first_dialogue and player.position.x >= 0:#1100:
 		received_first_dialogue = true
 		dialogue_box.buffer_dialogue("Hello, who are you? I haven't even finished making the game yet.")
 		dialogue_box.buffer_dialogue("What are you saying? It's already on itch?")
