@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="MainMenu" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="."]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 960.0
+margin_bottom = 536.0
+
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+margin_right = 896.0
