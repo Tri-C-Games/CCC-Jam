@@ -6,7 +6,6 @@ onready var middle_raycast = get_node("Middle RayCast")
 onready var right_raycast = get_node("Right RayCast")
 onready var raycasts = [left_raycast, middle_raycast, right_raycast]
 onready var collision_shape = get_node("CollisionShape2D")
-onready var can_jump_area2d = get_node("Can Jump Area2D")
 
 var velocity = Vector2()
 var jump_pressed = false
@@ -61,7 +60,7 @@ func movement(delta):
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	if can_jump_area2d.get_overlapping_bodies():
+	if is_on_floor():
 		can_jump = true
 		coyote_timer = 0
 	else:
