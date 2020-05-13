@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="CCC Jam"
+config/name="Maryo"
 run/main_scene="res://UI/MainMenu/MainMenu.tscn"
 boot_splash/image="res://README/CCC Jam.png"
 boot_splash/fullsize=false

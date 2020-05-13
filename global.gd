@@ -145,9 +145,13 @@ func restart():
 	if get_tree().reload_current_scene() != OK:
 		print_debug("An error occurred while attempting to reload the current scene.")
 
-func complete_restart():
-	can_open_console = false
-	restart()
+func complete_restart(go_to_menu = false):
+	global.can_open_console = false
+	if go_to_menu:
+		if get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn") != OK:
+			print_debug("An error occurred while attempting to go to the main menu.")
+	else:
+		restart()
 	print(global.commands_list)
 	print(global.gamevars_list)
 
