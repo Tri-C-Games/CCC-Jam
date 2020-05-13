@@ -27,9 +27,9 @@ func _process(_delta):
 		yield(dialogue_box, "finished")
 		
 		var height = global.random_int(8, 12)
-		var pos = Vector2(stepify(player.position.x, 64) + 384, stepify(player.position.y, 64) - (height + 2) * 32)
+		var pos = Vector2(stepify(player.position.x, 64) + 384, stepify(player.position.y, 64) - (height + 4) * 32)
 		for i in range(height):
-			create_falling_tile(pos - Vector2(0, 80*i), global.random_int(2, 5))
+			create_falling_tile(pos - Vector2(0, 80*i), 4)
 		
 		yield(tilemap, "tiles_stacked")
 		dialogue_box.buffer_dialogue("Hmmm... That's not supposed to happen. You can probably jump over this if you use the developer console. [color=red]Click the button in the top right or press ESC.[/color]")
