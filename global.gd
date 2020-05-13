@@ -2,6 +2,7 @@ extends Node
 
 var can_open_console = false
 
+
 enum tiles {
 	TILE_SOLO = 3
 	TILE_LEFT = 7,
@@ -19,9 +20,17 @@ var upgrade_path= [["gravity", "player_jump_speed"]]
 
 func upgrade():
 	#TODO: POPUP
+	var player = get_node("Player")
+	var dialogue_box = get_node("HUD/Dialogue Box")
+
+	var popup_text= "Hey, I just remembered that maybe you would find the var [color=blue]"
 	for item in upgrade_path[next_upgrade_path_progression]:
 		get(item).writable=true
-		
+		popup_text+= item+" "
+	
+	popup_text+="useful."
+	popup_text+= "[color=red] Use the variables command to see what they are.[color=white]"
+	dialogue_box.buffer_dialogue(popup_text)
 	next_upgrade_path_progression+=1
 
 class command:
