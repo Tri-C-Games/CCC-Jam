@@ -7,6 +7,7 @@ onready var increment_timer = get_node("Increment Visible Characters Timer")
 onready var next_dialogue_timer = get_node("Next Dialogue Timer")
 onready var stop_timer = get_node("Stop Dialogue Timer")
 onready var key_press_sfx = get_node("Key Press SFX")
+onready var bridge = preload("res://World/Tutorial/Bridge/Bridge.tscn").instance()
 
 var dialogue_buffer = []
 
@@ -71,6 +72,7 @@ func kill_dialogue():
 	next_dialogue_timer.stop()
 	stop_timer.stop()
 	emit_signal("finished")
+	get_parent().get_parent().get_parent().get_node("BridgePosition").add_child(bridge)
 
 func _on_Stop_Dialogue_Timer_timeout():
 	kill_dialogue()
