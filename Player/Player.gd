@@ -21,6 +21,9 @@ const COYOTE_MAX_TIME = 0.1
 var coyote_timer = 0
 var can_jump = false
 
+var pressedTime = 0.2 #in seconds, anti input frustration value
+var jumpPressedTimer=10
+
 var input_velocity = 0
 
 func _physics_process(delta):
@@ -63,11 +66,16 @@ func movement(delta):
 		coyote_timer = 0
 	else:
 		coyote_timer += delta
+		jumpPressedTimer+=delta
 	
 	if coyote_timer > COYOTE_MAX_TIME:
 		can_jump = false
 	
-	if (can_jump || global.player_fly.real_value) and jump_pressed:
+	if jump_pressed:
+		jumpPressedTimer=0
+	
+	if (can_jump || global.player_fly.real_value) and jump_pressed and jumpPressedTimer<=pressedTime:
+		jumpPressedTimer=1000
 		velocity.y -= global.player_jump_speed.real_value if not global.player_fly.real_value else global.player_fly_speed.real_value
 
 func check_if_in_void():
