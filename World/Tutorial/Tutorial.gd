@@ -21,7 +21,7 @@ func _process(_delta):
 		
 		dialogue_box.buffer_dialogue("Hello, who are you? I haven't finished making the game yet.")
 		dialogue_box.buffer_dialogue("What are you saying? It's already on itch?")
-		dialogue_box.buffer_dialogue("Oh crap, oh crap... Hey, I have an idea! Can you finish my game for me?")
+		dialogue_box.buffer_dialogue("OH CRAP OH CRAP... Hey, I have an idea! Can you finish my game for me?")
 		dialogue_box.start_dialogue()
 		
 		yield(dialogue_box, "finished")
