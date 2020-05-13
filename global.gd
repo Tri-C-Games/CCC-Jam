@@ -13,6 +13,17 @@ enum tiles {
 var commands_list = []
 var gamevars_list = []
 
+var next_upgrade_path_progression:int=0
+
+var upgrade_path= [["gravity", "player_jump_speed"]]
+
+func upgrade():
+	#TODO: POPUP
+	for item in upgrade_path[next_upgrade_path_progression]:
+		get(item).writable=true
+		
+	next_upgrade_path_progression+=1
+
 class command:
 	var aliases
 	var description:String
@@ -40,7 +51,7 @@ class gamevar:
 	var description:String
 	var writable:bool
 	
-	func _init(_aliases = [], _value = "", _type = "Number", _description = "", _writable = true):
+	func _init(_aliases = [], _value = "", _type = "Number", _description = "", _writable = false):
 		self.aliases = _aliases
 		self.type = _type
 		self.value = _value
