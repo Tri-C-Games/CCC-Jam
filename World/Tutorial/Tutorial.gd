@@ -52,5 +52,5 @@ func create_falling_tile(pos, width):
 	falling_tile_instance.set_width(width)
 	$"Falling Tiles".add_child(falling_tile_instance)
 
-func _on_Coin_body_entered(_body):
+func _on_Flag_body_entered(_body):
 	global.go_to_next_level()
