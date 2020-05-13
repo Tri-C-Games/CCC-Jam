@@ -43,6 +43,10 @@ func parse_command(text):
 			variable.value = new_value
 			
 			console.output_text("[i]%s has been set to %s.[/i]" % [variable_str, new_value], false)
+			
+			if not variable.is_value_valid():
+				console.output_text("The data type used is invalid.", false)
+			# TODO - Could be cool to add some sort of in game effect (increased amount of visual artifacts?) if the player inputs the wrong value.
 		"get":
 			var variable_str = separated_command[1].to_lower()
 			var variable = global.gamevar.get_gamevar(variable_str)
