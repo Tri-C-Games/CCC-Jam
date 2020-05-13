@@ -7,6 +7,7 @@ onready var hud = player.get_node("HUD")
 onready var dialogue_box = player.get_node("HUD/Dialogue Box")
 onready var tilemap = get_node("TileMap")
 onready var FallZone = get_node("FallZone").position
+onready var falling_tile_support_pos = get_node("Falling Tile Support").position
 
 var received_first_dialogue = false
 var after_tower_first = false
@@ -31,6 +32,11 @@ func _process(_delta):
 		var pos = FallZone
 		for i in range(height):
 			create_falling_tile(pos - Vector2(0, 80*i), 4)
+		var support_pos = tilemap.world_to_map(falling_tile_support_pos)
+		tilemap.set_cellv(support_pos, global.tiles.TILE_LEFT)
+		for i in range(4):
+			tilemap.set_cellv(support_pos + Vector2(i + 1, 0), global.tiles.TILE_MIDDLE)
+		tilemap.set_cellv(support_pos + Vector2(5, 0), global.tiles.TILE_RIGHT)
 		
 		yield(tilemap, "tiles_stacked")
 		dialogue_box.buffer_dialogue("Hmmm... That's not supposed to happen. You can probably jump over this if you use the developer console. [color=red]Click the button in the top right or press ESC.[/color]")
