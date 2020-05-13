@@ -53,5 +53,5 @@ position = Vector2( 528, -232 )
 light_mask = 3
 
 [node name="FallZone" type="Node2D" parent="."]
-position = Vector2( 2350.24, -1200 )
+position = Vector2( 2304, -1200 )
 [connection signal="body_entered" from="Coin" to="." method="_on_Coin_body_entered"]
