@@ -6,6 +6,7 @@ onready var player = get_node("Player")
 onready var hud = player.get_node("HUD")
 onready var dialogue_box = player.get_node("HUD/Dialogue Box")
 onready var tilemap = get_node("TileMap")
+onready var FallZone = get_node("FallZone").position
 
 var received_first_dialogue = false
 var after_tower_first = false
@@ -19,7 +20,7 @@ func _process(_delta):
 	if not received_first_dialogue and player.position.x >= 1100:
 		received_first_dialogue = true
 		
-		dialogue_box.buffer_dialogue("Hello, who are you? I haven't finished making the game yet.")
+		dialogue_box.buffer_dialogue("Hey! Who are you? What are you doing here? I haven't finished making the game yet.")
 		dialogue_box.buffer_dialogue("What are you saying? It's already on itch?")
 		dialogue_box.buffer_dialogue("OH CRAP OH CRAP... Hey, I have an idea! Can you finish my game for me?")
 		dialogue_box.start_dialogue()
@@ -27,7 +28,7 @@ func _process(_delta):
 		yield(dialogue_box, "finished")
 		
 		var height = 12
-		var pos = Vector2(stepify(player.position.x, 64) + 384, stepify(player.position.y, 64) - (height + 2) * 32)
+		var pos = FallZone
 		for i in range(height):
 			create_falling_tile(pos - Vector2(0, 80*i), 4)
 		
