@@ -27,18 +27,16 @@ script = ExtResource( 6 )
 
 [node name="Falling Tiles" type="Node2D" parent="."]
 
-[node name="Text" type="Node2D" parent="."]
-
-[node name="Label" type="Label" parent="Text"]
-margin_left = -337.0
-margin_top = -209.0
-margin_right = 211.0
-margin_bottom = -202.0
+[node name="Text" type="Label" parent="."]
+margin_left = -272.0
+margin_top = -224.0
+margin_right = 291.0
+margin_bottom = -217.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
-text = "Hello and Welcome to Pixelland"
+text = "Hello and welcome to Pixelland"
 __meta__ = {
 "_edit_use_anchors_": false
 }

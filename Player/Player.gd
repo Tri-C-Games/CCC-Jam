@@ -27,6 +27,7 @@ func _physics_process(delta):
 	input_velocity = 0
 	get_input()
 	movement(delta)
+	check_if_in_void()
 	animate()
 
 func get_input():
@@ -68,6 +69,10 @@ func movement(delta):
 	
 	if (can_jump || global.player_fly.real_value) and jump_pressed:
 		velocity.y -= global.player_jump_speed.real_value if not global.player_fly.real_value else global.player_fly_speed.real_value
+
+func check_if_in_void():
+	if position.y >= 4000:
+		global.restart()
 
 func animate():
 	var moving = abs(velocity.x) > 0

@@ -2,7 +2,6 @@ extends Node
 
 var can_open_console = false
 
-
 enum tiles {
 	TILE_SOLO = 3
 	TILE_LEFT = 7,
@@ -19,7 +18,6 @@ var next_upgrade_path_progression:int=0
 var upgrade_path= [["gravity", "player_jump_speed"]]
 
 func upgrade(dialogue_box):
-	
 	var popup_text= "Hey, I just remembered! Maybe you would find the vars [color=blue]"
 	for item in upgrade_path[next_upgrade_path_progression]:
 		get(item).writable=true
@@ -28,6 +26,7 @@ func upgrade(dialogue_box):
 	popup_text+="[color=black]useful."
 	popup_text+= "[color=red] Use the variables command to see what they are.[color=black]"
 	dialogue_box.buffer_dialogue(popup_text)
+	dialogue_box.start_dialogue()
 	next_upgrade_path_progression+=1
 
 class command:
@@ -97,7 +96,7 @@ onready var get_command = command.new(["get", "return"], "Return a specified var
 "get [variable name]")
 onready var exit_command = command.new(["exit", "quit", "stop"], "Exit the developer console", 1,
 "exit - What did you expect this to tell you? It just exits the menu.")
-onready var restart_command = command.new(["restart", "redo", "reset"], "Restart the game", 1,
+onready var restart_command = command.new(["restart", "redo", "reset"], "Completely restart the game", 1,
 "restart - What did you expect this to tell you? It just restarts the game.")
 
 #Game Vars
@@ -142,7 +141,17 @@ func place_tiles(tilemap, width, base_pos = Vector2(0, 0)):
 			else:
 				tilemap.set_cellv(final_pos, global.tiles.TILE_MIDDLE)
 
+func restart():
+	if get_tree().reload_current_scene() != OK:
+		print_debug("An error occurred while attempting to reload the current scene.")
+
+func complete_restart():
+	can_open_console = false
+	restart()
+	print(global.commands_list)
+	print(global.gamevars_list)
+
 func go_to_next_level():
 	# TODO
-	if get_tree().change_scene("res://World/Levels/Level2.tscn") != OK:
+	if get_tree().change_scene("res://UI/End Screen/End Screen.tscn") != OK:
 		print_debug("An error occurred while attempting to go to the next level.")
