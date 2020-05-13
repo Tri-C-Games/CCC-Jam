@@ -26,7 +26,7 @@ func _process(_delta):
 		
 		yield(dialogue_box, "finished")
 		
-		var height = global.random_int(8, 12)
+		var height = 12
 		var pos = Vector2(stepify(player.position.x, 64) + 384, stepify(player.position.y, 64) - (height + 2) * 32)
 		for i in range(height):
 			create_falling_tile(pos - Vector2(0, 80*i), 4)
