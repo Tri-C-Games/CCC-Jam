@@ -7,6 +7,7 @@ onready var hud = player.get_node("HUD")
 onready var dialogue_box = player.get_node("HUD/Dialogue Box")
 onready var tilemap = get_node("TileMap")
 onready var FallZone = get_node("FallZone").position
+onready var falling_tile_support_pos = get_node("Falling Tile Support").position
 
 var received_first_dialogue = false
 var after_tower_first = false
@@ -22,7 +23,7 @@ func _process(_delta):
 		
 		dialogue_box.buffer_dialogue("Hey! Who are you? What are you doing here? I haven't finished making the game yet.")
 		dialogue_box.buffer_dialogue("What are you saying? It's already on itch?")
-		dialogue_box.buffer_dialogue("OH CRAP OH CRAP... Hey, I have an idea! Can you finish my game for me?")
+		dialogue_box.buffer_dialogue("OH SHIT... Hey, I have an idea! Can you finish my game for me?")
 		dialogue_box.start_dialogue()
 		
 		yield(dialogue_box, "finished")
@@ -31,14 +32,20 @@ func _process(_delta):
 		var pos = FallZone
 		for i in range(height):
 			create_falling_tile(pos - Vector2(0, 80*i), 4)
+		var support_pos = tilemap.world_to_map(falling_tile_support_pos)
+		tilemap.set_cellv(support_pos, global.tiles.TILE_LEFT)
+		for i in range(4):
+			tilemap.set_cellv(support_pos + Vector2(i + 1, 0), global.tiles.TILE_MIDDLE)
+		tilemap.set_cellv(support_pos + Vector2(5, 0), global.tiles.TILE_RIGHT)
 		
 		yield(tilemap, "tiles_stacked")
 		dialogue_box.buffer_dialogue("Hmmm... That's not supposed to happen. You can probably jump over this if you use the developer console. [color=red]Click the button in the top right or press ESC.[/color]")
 		dialogue_box.start_dialogue()
 		
-		after_tower_first = true
-		
 		hud.enable_open_console()
+		
+		yield(dialogue_box, "finished")
+		after_tower_first = true
 	
 	if after_tower_first and player.position.x >= 2900:
 		after_tower_first = false
@@ -52,5 +59,5 @@ func create_falling_tile(pos, width):
 	falling_tile_instance.set_width(width)
 	$"Falling Tiles".add_child(falling_tile_instance)
 
-func _on_Coin_body_entered(_body):
+func _on_Flag_body_entered(_body):
 	global.go_to_next_level()
