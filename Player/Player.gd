@@ -20,7 +20,7 @@ const COYOTE_MAX_TIME = 0.1
 var coyote_timer = 0
 var can_jump = false
 
-var pressedTime = 0.2 #in seconds, anti input frustration value
+var pressedTime = 0.3 #in seconds, anti input frustration value
 var jumpPressedTimer=10
 
 var input_velocity = 0
