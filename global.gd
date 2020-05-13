@@ -95,7 +95,7 @@ onready var player_jump_speed = gamevar.new(["player_jump_speed", "player_jump",
 "The speed (or force) applied to the player when jumping")
 onready var player_health = gamevar.new(["player_health", "health", "hp"], "100", "Number",
 "The health that the player has")
-onready var player_damage_bounce = gamevar.new(["player_damage_bounce", "damage_bounce", "bounce"], "500", "Number",
+onready var player_damage_bounce = gamevar.new(["player_damage_bounce", "damage_bounce", "bounce", "enemy_bounce"], "500", "Number",
 "The amount of knockback the player receives when the player kills an enemy")
 
 #Enemies Vars
