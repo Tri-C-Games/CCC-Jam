@@ -5,6 +5,8 @@ onready var left_raycast = get_node("Left RayCast")
 onready var middle_raycast = get_node("Middle RayCast")
 onready var right_raycast = get_node("Right RayCast")
 onready var raycasts = [left_raycast, middle_raycast, right_raycast]
+onready var collision_shape = get_node("CollisionShape2D")
+onready var can_jump_area2d = get_node("Can Jump Area2D")
 
 var velocity = Vector2()
 var jump_pressed = false
@@ -15,10 +17,9 @@ export (Curve) var anim_speed_curve
 
 const rotation_weight = 0.2
 
-var coyoteTime = 0;#in seconds
-var pressedTime = 0.2 #in seconds, anti input frustration value
-var coyoteTimer = 10
-var jumpPressedTimer=10
+const COYOTE_MAX_TIME = 0.1
+var coyote_timer = 0
+var can_jump = false
 
 var input_velocity = 0
 
@@ -41,11 +42,11 @@ func get_input():
 		velocity.x += input_velocity * acc
 	
 	jump_pressed = false
-	if Input.is_action_pressed("jump") if not global.player_fly.real_value else Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") if not global.player_fly.real_value else Input.is_action_just_pressed("jump"):
 		jump_pressed = true
 
 func movement(delta):
-	if not is_on_floor() and global.gravity.real_value > 0:#any_raycasts_colliding():# and global.gravity.real_value > 0:
+	if not is_on_floor() and global.gravity.real_value > 0:
 		velocity.y += global.gravity.real_value * delta
 	
 	# Friction
@@ -56,19 +57,17 @@ func movement(delta):
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	if is_on_floor() || global.player_fly.real_value:
-		coyoteTimer = 0
-		if jump_pressed:
-			velocity.y -= global.player_jump_speed.real_value if not global.player_fly.real_value else global.player_fly_speed.real_value
+	if can_jump_area2d.get_overlapping_bodies():
+		can_jump = true
+		coyote_timer = 0
+	else:
+		coyote_timer += delta
 	
-	if jump_pressed:
-		jumpPressedTimer=0
-	if coyoteTimer<=coyoteTime and jumpPressedTimer<=pressedTime:
-		velocity.y -= global.player_jump_speed.real_value
-		jumpPressedTimer=1000
-		coyoteTimer=1000
-	jumpPressedTimer+=delta
-	coyoteTimer+=delta
+	if coyote_timer > COYOTE_MAX_TIME:
+		can_jump = false
+	
+	if (can_jump || global.player_fly.real_value) and jump_pressed:
+		velocity.y -= global.player_jump_speed.real_value if not global.player_fly.real_value else global.player_fly_speed.real_value
 
 func animate():
 	var moving = abs(velocity.x) > 0
@@ -76,10 +75,13 @@ func animate():
 		anim_sprite.flip_h = velocity.x < 0
 	
 	var normal = get_average_normal()
+	var angle
 	if normal != Vector2.ZERO:
-		anim_sprite.rotation = lerp(anim_sprite.rotation, normal.angle() + TAU/4, rotation_weight)
+		angle = lerp(anim_sprite.rotation, normal.angle() + TAU/4, rotation_weight)
 	else:
-		anim_sprite.rotation = lerp(anim_sprite.rotation, 0, rotation_weight)
+		angle = lerp(anim_sprite.rotation, 0, rotation_weight)
+	anim_sprite.rotation = angle
+	collision_shape.rotation = angle
 	
 	if not any_raycasts_colliding():
 		if velocity.y < 0:

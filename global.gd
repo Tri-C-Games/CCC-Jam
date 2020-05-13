@@ -95,7 +95,7 @@ onready var restart_command = command.new(["restart", "redo", "reset"], "Restart
 "restart - What did you expect this to tell you? It just restarts the game.")
 
 #Game Vars
-onready var gravity = gamevar.new(["gravity"], "1600", "Number",
+onready var gravity = gamevar.new(["gravity"], "1800", "Number",
 "The value of gravity")
 
 #Player Vars
@@ -109,7 +109,7 @@ onready var player_max_acc = gamevar.new(["player_max_acc", "player_acc", "acc"]
 "The maximum acceleration the player can be applying")
 onready var player_max_friction = gamevar.new(["player_max_friction", "player_friction", "friction"], "60", "Number",
 "The maximum friction that can be applied to the player")
-onready var player_jump_speed = gamevar.new(["player_jump_speed", "player_jump", "jump"], "350", "Number",
+onready var player_jump_speed = gamevar.new(["player_jump_speed", "player_jump", "jump"], "900", "Number",
 "The speed (or force) applied to the player when jumping")
 onready var player_health = gamevar.new(["player_health", "health", "hp"], "100", "Number",
 "The health that the player has")

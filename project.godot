@@ -24,6 +24,10 @@ config/icon="res://Sprites/Terminal/Terminal.png"
 
 global="*res://global.gd"
 
+[debug]
+
+gdscript/completion/autocomplete_setters_and_getters=true
+
 [importer_defaults]
 
 texture={
