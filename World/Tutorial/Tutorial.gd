@@ -40,12 +40,10 @@ func _process(_delta):
 		
 		yield(tilemap, "tiles_stacked")
 		dialogue_box.buffer_dialogue("Hmmm... That's not supposed to happen. You can probably jump over this if you use the developer console. [color=red]Click the button in the top right or press ESC.[/color]")
+		global.upgrade(dialogue_box)
 		dialogue_box.start_dialogue()
 		
 		hud.enable_open_console()
-		global.upgrade(dialogue_box)
-		yield(dialogue_box, "finished")
-		
 		
 		yield(dialogue_box, "finished")
 		

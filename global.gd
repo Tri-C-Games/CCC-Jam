@@ -26,7 +26,6 @@ func upgrade(dialogue_box):
 	popup_text+="[color=black]useful."
 	popup_text+= "[color=red] Use the variables command to see what they are.[color=black]"
 	dialogue_box.buffer_dialogue(popup_text)
-	dialogue_box.start_dialogue()
 	next_upgrade_path_progression+=1
 
 class command:
