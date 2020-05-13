@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sky 1.png-0abfd5af406af096614acc96ec2efe93.stex"
+path="res://.import/Enemy.png-f79f18b045045de70b69cc3772361701.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/Sky/Sky 1.png"
-dest_files=[ "res://.import/Sky 1.png-0abfd5af406af096614acc96ec2efe93.stex" ]
+source_file="res://Enemies/Enemy.png"
+dest_files=[ "res://.import/Enemy.png-f79f18b045045de70b69cc3772361701.stex" ]
 
 [params]
 

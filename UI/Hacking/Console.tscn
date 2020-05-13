@@ -51,6 +51,8 @@ margin_bottom = 600.0
 theme = ExtResource( 2 )
 custom_styles/normal = SubResource( 2 )
 custom_colors/font_color = Color( 0, 1, 0, 1 )
+placeholder_text = "help"
+placeholder_alpha = 0.3
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Enemy.png-b0ecaef8b8d5bc2371ac6b591be0ae6c.stex"
+path="res://.import/Coin.png-9a3e4b6d63d9822bf2205634b4a3c5f6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemies/Enemie1/Enemy.png"
-dest_files=[ "res://.import/Enemy.png-b0ecaef8b8d5bc2371ac6b591be0ae6c.stex" ]
+source_file="res://Coin/Coin.png"
+dest_files=[ "res://.import/Coin.png-9a3e4b6d63d9822bf2205634b4a3c5f6.stex" ]
 
 [params]
 

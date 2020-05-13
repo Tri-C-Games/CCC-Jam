@@ -2,6 +2,9 @@ extends KinematicBody2D
 
 onready var raycast = get_node("RayCast2D")
 onready var anim_sprite = get_node("AnimatedSprite")
+onready var right_raycast = get_node("Right Raycast")
+onready var left_raycast = get_node("Left Raycast")
+onready var up_raycast = get_node("Up Raycast")
 
 var velocity = Vector2()  
 const RIGHT = 1
@@ -13,14 +16,9 @@ func _physics_process(delta):
 	animate()
 
 func movement(delta):
-	velocity.x = global.enemie1_max_speed.real_value * dir
+	velocity.x = global.enemy_max_speed.real_value * dir
 	velocity.y += global.gravity.real_value * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
-	
-	for i in get_slide_count():
-		var collision = get_slide_collision(i)
-		if collision.collider.name == "Player":
-			collision.collider.die()
 	
 	if raycast.is_colliding() == false:
 		dir *= LEFT
@@ -29,17 +27,25 @@ func movement(delta):
 	if is_on_wall():
 		dir *= LEFT
 		raycast.position.x *= LEFT
+	
+	# If trapped (may be due to the falling tiles).
+	if right_raycast.is_colliding() and left_raycast.is_colliding() and up_raycast.is_colliding():
+		die()
 
 func animate():
 	if abs(velocity.x) > 0:
 		anim_sprite.flip_h = velocity.x < 0
 		
-		$AnimatedSprite.play("Walk")
+		anim_sprite.play("Walk")
 
 func die():
 	queue_free()
 
-func _on_Area2D_body_entered(body):
+func _on_Die_Zone_body_entered(body):
 	if body.has_method("knockback"):
 		body.knockback(global.player_damage_bounce.real_value, Vector2.UP)
 		die()
+
+func _on_Kill_Zone_body_entered(body):
+	if body.name == "Player":
+		body.die()
