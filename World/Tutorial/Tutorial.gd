@@ -23,7 +23,7 @@ func _process(_delta):
 		
 		dialogue_box.buffer_dialogue("Hey! Who are you? What are you doing here? I haven't finished making the game yet.")
 		dialogue_box.buffer_dialogue("What are you saying? It's already on itch?")
-		dialogue_box.buffer_dialogue("OH SHIT... Hey, I have an idea! Can you finish my game for me?")
+		dialogue_box.buffer_dialogue("OH CRAP THIS IS BAD... Hey, I have an idea! Can you finish the game for me?")
 		dialogue_box.start_dialogue()
 		
 		yield(dialogue_box, "finished")
@@ -51,7 +51,7 @@ func _process(_delta):
 	if after_tower_first and player.position.x >= 2900:
 		after_tower_first = false
 		
-		dialogue_box.buffer_dialogue("Hurry up and get up there already!")
+		dialogue_box.buffer_dialogue("Hurry up and get up there!")
 		dialogue_box.start_dialogue()
 
 func create_falling_tile(pos, width):

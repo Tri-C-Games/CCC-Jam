@@ -19,20 +19,14 @@ var next_upgrade_path_progression:int=0
 var upgrade_path= [["gravity", "player_jump_speed"]]
 
 func upgrade(dialogue_box):
-	#TODO: POPUP
-#	var player = get_node("Player")
-#	var dialogue_box = get_node("HUD/Dialogue Box")
-#
-#	print(player)
-#	print(dialogue_box)
 	
-	var popup_text= "Hey, I just remembered that maybe you would find the var [color=blue]"
+	var popup_text= "Hey, I just remembered! Maybe you would find the vars [color=blue]"
 	for item in upgrade_path[next_upgrade_path_progression]:
 		get(item).writable=true
-		popup_text+= item+" "
+		popup_text+= item+", "
 	
-	popup_text+="useful."
-	popup_text+= "[color=red] Use the variables command to see what they are.[color=white]"
+	popup_text+="[color=black]useful."
+	popup_text+= "[color=red] Use the variables command to see what they are.[color=black]"
 	dialogue_box.buffer_dialogue(popup_text)
 	next_upgrade_path_progression+=1
 
