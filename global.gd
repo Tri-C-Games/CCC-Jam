@@ -48,9 +48,15 @@ class gamevar:
 		self.writable = _writable
 		global.gamevars_list.append(self)
 	
+	func is_value_valid():
+		match self.type:
+			"Number":
+				return self.value.is_valid_float()
+			"True/False":
+				return self.value == "true" || value == "false"
+	
 	func set_real_value(_val):
 		value = _val
-		# TODO - Could be cool to add some sort of in game effect if the player inputs the wrong value.
 		match self.type:
 			"Number":
 				self.real_value = float(value) if value.is_valid_float() else 0.0
@@ -78,11 +84,12 @@ onready var restart_command = command.new(["restart", "redo", "reset"], "Restart
 "restart - What did you expect this to tell you? It just restarts the game.")
 
 #Game Vars
-onready var gravity = gamevar.new(["gravity"], "1600", "Number", "The value of the gravity")
+onready var gravity = gamevar.new(["gravity"], "1600", "Number",
+"The value of gravity")
 
 #Player Vars
 onready var player_fly = gamevar.new(["player_fly", "fly"], "false", "True/False",
-"The player's ability to fly")
+"Whether or not the player can fly")
 onready var player_fly_speed = gamevar.new(["player_fly_speed", "fly_speed"], "50", "Number",
 "How fast the player flies")
 onready var player_max_speed = gamevar.new(["player_max_speed", "player_speed", "speed"], "700", "Number",
@@ -98,10 +105,9 @@ onready var player_health = gamevar.new(["player_health", "health", "hp"], "100"
 onready var player_damage_bounce = gamevar.new(["player_damage_bounce", "damage_bounce", "bounce", "enemy_bounce"], "500", "Number",
 "The amount of knockback the player receives when the player kills an enemy")
 
-#Enemies Vars
-
-#Enemie1 Vars
-onready var enemy_max_speed = gamevar.new(["enemy_max_speed", "enemy_speed"], "150", "Number", "The maximum speed at which the enemy can move")
+#Enemy Vars
+onready var enemy_max_speed = gamevar.new(["enemy_max_speed", "enemy_speed"], "150", "Number",
+"The maximum speed at which the enemy can move")
 
 func random_int(minimum, maximum):
 	return range(minimum, maximum)[randi() % range(minimum, maximum).size()]
