@@ -11,4 +11,5 @@ All of the art and assets except the fonts were made by the team.
 
 ## Credits
 Console Font - https://sourcefoundry.org/hack/
+
 World Font - Pixeljosh6 by Mirz12: https://www.dafont.com/pixeljosh6.font
