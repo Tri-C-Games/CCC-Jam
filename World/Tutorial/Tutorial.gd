@@ -42,9 +42,10 @@ func _process(_delta):
 		dialogue_box.buffer_dialogue("Hmmm... That's not supposed to happen. You can probably jump over this if you use the developer console. [color=red]Click the button in the top right or press ESC.[/color]")
 		dialogue_box.start_dialogue()
 		
-		after_tower_first = true
-		
 		hud.enable_open_console()
+		
+		yield(dialogue_box, "finished")
+		after_tower_first = true
 	
 	if after_tower_first and player.position.x >= 2900:
 		after_tower_first = false
