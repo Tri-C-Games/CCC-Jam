@@ -43,9 +43,9 @@ func _process(_delta):
 		dialogue_box.start_dialogue()
 		
 		hud.enable_open_console()
+		global.upgrade(dialogue_box)
 		yield(dialogue_box, "finished")
 		
-		global.upgrade(dialogue_box)
 		
 		yield(dialogue_box, "finished")
 		
