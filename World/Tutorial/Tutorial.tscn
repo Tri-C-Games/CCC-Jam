@@ -55,5 +55,5 @@ position = Vector2( 528, -232 )
 light_mask = 3
 
 [node name="FallZone" type="Node2D" parent="."]
-position = Vector2( 2350.24, -1200 )
+position = Vector2( 2304, -1200 )
 [connection signal="body_entered" from="Flags/Flag" to="." method="_on_Flag_body_entered"]
