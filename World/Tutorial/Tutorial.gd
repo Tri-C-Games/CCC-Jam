@@ -61,3 +61,7 @@ func create_falling_tile(pos, width):
 
 func _on_Flag_body_entered(_body):
 	global.go_to_next_level()
+
+
+func _on_Killing_Zone_body_shape_entered(body_id, body, body_shape, area_shape):
+	get_tree().reload_current_scene()
