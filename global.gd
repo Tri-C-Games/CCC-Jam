@@ -50,6 +50,7 @@ class command:
 
 class gamevar:
 	var aliases
+	var default_value:String
 	var value:String setget set_real_value
 	var real_value
 	var type:String
@@ -60,6 +61,7 @@ class gamevar:
 		self.aliases = _aliases
 		self.type = _type
 		self.value = _value
+		self.default_value = self.value
 		self.description = _description
 		self.writable = _writable
 		global.gamevars_list.append(self)
@@ -84,6 +86,10 @@ class gamevar:
 			for alias in gamevar.aliases:
 				if name == alias and gamevar.writable:
 					return gamevar
+	
+	static func reset_gamevars():
+		for gamevar in global.gamevars_list:
+			gamevar.value = gamevar.default_value
 
 #Commands
 onready var help_command = command.new(["help", "info", "tutorial"], "Display a list of commands", 1,
@@ -147,13 +153,12 @@ func restart():
 
 func complete_restart(go_to_menu = false):
 	global.can_open_console = false
+	global.gamevar.reset_gamevars()
 	if go_to_menu:
 		if get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn") != OK:
 			print_debug("An error occurred while attempting to go to the main menu.")
 	else:
 		restart()
-	print(global.commands_list)
-	print(global.gamevars_list)
 
 func go_to_next_level():
 	# TODO
