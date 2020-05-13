@@ -45,7 +45,8 @@ func _process(_delta):
 		after_tower_first = true
 		
 		hud.enable_open_console()
-		global.upgrade()
+		
+		global.upgrade(dialogue_box)
 	
 	if after_tower_first and player.position.x >= 2900:
 		after_tower_first = false

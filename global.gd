@@ -18,11 +18,14 @@ var next_upgrade_path_progression:int=0
 
 var upgrade_path= [["gravity", "player_jump_speed"]]
 
-func upgrade():
+func upgrade(dialogue_box):
 	#TODO: POPUP
-	var player = get_node("Player")
-	var dialogue_box = get_node("HUD/Dialogue Box")
-
+#	var player = get_node("Player")
+#	var dialogue_box = get_node("HUD/Dialogue Box")
+#
+#	print(player)
+#	print(dialogue_box)
+	
 	var popup_text= "Hey, I just remembered that maybe you would find the var [color=blue]"
 	for item in upgrade_path[next_upgrade_path_progression]:
 		get(item).writable=true
