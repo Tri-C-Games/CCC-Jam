@@ -11,17 +11,20 @@ onready var key_press_sfx = get_node("Key Press SFX")
 var dialogue_buffer = []
 
 var pausing_punctuation = {
-	"." : 0.5,
+	"." : 0.4,
 	"!" : 0.5,
 	"?" : 0.5,
 	"," : 0.2
 }
 
+func _ready():
+	rich_text_label.visible_characters = 0
+
 func buffer_dialogue(text):
 	dialogue_buffer.append(text)
 
 func start_dialogue():
-	rich_text_label.text = dialogue_buffer[0]
+	rich_text_label.bbcode_text = dialogue_buffer[0]
 	rich_text_label.visible_characters = 0
 	visible = true
 	increment_timer.start()
@@ -54,11 +57,12 @@ func _on_Next_Dialogue_Timer_timeout():
 
 func set_next_dialogue():
 	increment_timer.paused = false
-	rich_text_label.text = dialogue_buffer[0]
+	rich_text_label.bbcode_text = dialogue_buffer[0]
 	rich_text_label.visible_characters = 0
 
 func stop_dialogue():
 	increment_timer.stop()
+	next_dialogue_timer.stop()
 	stop_timer.start()
 
 func kill_dialogue():

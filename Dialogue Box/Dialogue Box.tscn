@@ -5,7 +5,8 @@
 [ext_resource path="res://Sounds/Hacking Interface/Key Press.wav" type="AudioStream" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-extra_spacing_top = 13
+size = 24
+extra_spacing_top = 20
 extra_spacing_bottom = 6
 font_data = ExtResource( 1 )
 
@@ -37,7 +38,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-visible_characters = 0
+bbcode_enabled = true
 scroll_following = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -52,19 +53,18 @@ __meta__ = {
 }
 
 [node name="Increment Visible Characters Timer" type="Timer" parent="."]
-wait_time = 0.08
+wait_time = 0.06
 
 [node name="Next Dialogue Timer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [node name="Stop Dialogue Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.5
 one_shot = true
 
 [node name="Key Press SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -15.0
+volume_db = -25.0
 [connection signal="pressed" from="ColorRect/Button" to="." method="_on_Button_pressed"]
 [connection signal="timeout" from="Increment Visible Characters Timer" to="." method="_on_Increment_Visible_Characters_Timer_timeout"]
 [connection signal="timeout" from="Next Dialogue Timer" to="." method="_on_Next_Dialogue_Timer_timeout"]

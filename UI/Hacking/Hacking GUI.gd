@@ -5,12 +5,15 @@ signal exit_pressed
 onready var console = get_node("Console")
 var success_text = "The \"%s\" command has been used successfully."
 var invalid_syntax_text = "Please use the correct syntax."
-var not_recognised_text = "\'%s\' is not recognised as an internal or external command,\noperable program or batch file."
+var not_recognised_command_text = "\'%s\' is not recognised as an internal or external command.  Please see the \'help\' command."
+var not_recognised_variable_text = "\'%s\' is not recognised as an internal or external variable. Please see the \'variables\' command."
 
 func _on_Console_command_entered(command):
 	parse_command(command)
 
 func parse_command(text):
+	text = text.strip_edges(true, true)
+	
 	# Separate the command into words. E.g. "set player_max_speed 100" will return ["set", "player_max_speed", "100"].
 	var separated_command = text.split(" ")
 	
@@ -20,7 +23,7 @@ func parse_command(text):
 	
 	# If the command doesn't exist.
 	if not command:
-		console.output_error(not_recognised_text % command_str)
+		console.output_error(not_recognised_command_text % command_str)
 		return
 	
 	if separated_command.size() < command.min_parameters:
@@ -28,12 +31,12 @@ func parse_command(text):
 		return
 	
 	# Different commands do different things.
-	match command.name:
+	match command.aliases[0]:
 		"set":
 			var variable_str = separated_command[1].to_lower()
 			var variable = global.gamevar.get_gamevar(variable_str)
 			if not variable:
-				console.output_error(not_recognised_text % variable_str)
+				console.output_error(not_recognised_variable_text % variable_str)
 				return
 			
 			var new_value = separated_command[2].to_lower()
@@ -44,7 +47,7 @@ func parse_command(text):
 			var variable_str = separated_command[1].to_lower()
 			var variable = global.gamevar.get_gamevar(variable_str)
 			if not variable:
-				console.output_error(not_recognised_text % variable_str)
+				console.output_error(not_recognised_variable_text % variable_str)
 				return
 			
 			console.output_text(variable.value, false)
@@ -54,10 +57,20 @@ func parse_command(text):
 			exit()
 			restart()
 		"help":
-			var output = "Commands:\n"
-			for command in global.commands_list:
-				output += str(command.name, " - ", command.description, "\n")
-			output = output.trim_suffix("\n")
+			var output
+			if separated_command.size() > 1:
+				var cmd_str = separated_command[1].to_lower()
+				var cmd = global.command.get_command(cmd_str)
+				if not cmd:
+					output = not_recognised_variable_text % cmd_str
+				else:
+					output = str("Syntax: ", cmd.syntax)
+			else:
+				output = "Commands:\n"
+				for command in global.commands_list:
+					output += str(command.aliases[0], " - ", command.description, "\n")
+				output = output.trim_suffix("\n")
+			
 			console.output_text(output, false)
 		"variables":
 			var output = "Variables:\n"

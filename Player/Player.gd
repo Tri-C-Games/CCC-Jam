@@ -45,7 +45,7 @@ func get_input():
 		jump_pressed = true
 
 func movement(delta):
-	if not is_on_floor() and global.gravity.real_value > 0:
+	if not is_on_floor() and global.gravity.real_value > 0:#any_raycasts_colliding():# and global.gravity.real_value > 0:
 		velocity.y += global.gravity.real_value * delta
 	
 	# Friction
