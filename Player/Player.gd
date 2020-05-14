@@ -79,8 +79,12 @@ func movement(delta):
 		jumpPressedTimer=0
 	
 	if (can_jump || global.player_fly.real_value) and jump_pressed and jumpPressedTimer<=pressedTime:
-		jumpPressedTimer=1000
-		velocity.y -= global.player_jump_speed.real_value if not global.player_fly.real_value else global.player_fly_speed.real_value
+		jump()
+
+func jump():
+	jumpPressedTimer=1000
+	velocity.y -= global.player_jump_speed.real_value if not global.player_fly.real_value else global.player_fly_speed.real_value
+	$"Jump SFX".play()
 
 func check_if_in_void():
 	if position.y >= 1000:
