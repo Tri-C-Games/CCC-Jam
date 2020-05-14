@@ -26,7 +26,7 @@ tile_set = ExtResource( 8 )
 collision_layer = 32
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -131064, 1610612736, 0, -131063, 1610612736, 0, -131062, 1610612736, 0, -131061, 1610612736, 0, -131060, 1610612736, 0, -131059, 1610612736, 0, -131058, 1610612736, 0, -131057, 1610612736, 0, -131056, 1610612736, 0 )
+tile_data = PoolIntArray( -131065, 1610612736, 0, -131064, 1610612736, 0, -131063, 1610612736, 0, -131062, 1610612736, 0, -131061, 1610612736, 0, -131060, 1610612736, 0, -131059, 1610612736, 0, -131058, 1610612736, 0, -131057, 1610612736, 0, -131056, 1610612736, 0, -131055, 1610612736, 0 )
 
 [node name="Flags" type="Node2D" parent="."]
 
@@ -106,4 +106,3 @@ position = Vector2( 560, 88 )
 
 [node name="Enemy23" parent="Enemies" instance=ExtResource( 5 )]
 position = Vector2( 504, 88 )
-[connection signal="body_entered" from="Flags/Flag" to="." method="_on_Flag_body_entered"]
