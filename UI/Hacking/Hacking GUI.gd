@@ -9,6 +9,7 @@ var not_recognised_command_text = "\'%s\' is not recognised as an internal or ex
 var not_recognised_variable_text = "\'%s\' is not recognised as an internal or external variable. Please see the \'variables\' command."
 
 func _on_Console_command_entered(command):
+	$"Enter SFX".play()
 	parse_command(command)
 
 func parse_command(text):

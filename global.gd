@@ -13,20 +13,17 @@ enum tiles {
 var commands_list = []
 var gamevars_list = []
 
-var next_upgrade_path_progression:int=0
+var upgrade_path= [["gravity", "player_jump_speed"], ["player_max_speed", "player_max_acc"]]
 
-var upgrade_path= [["gravity", "player_jump_speed"]]
-
-func upgrade(dialogue_box):
+func upgrade(dialogue_box, path_number):
 	var popup_text= "Hey, I just remembered! Maybe you would find the vars [color=blue]"
-	for item in upgrade_path[next_upgrade_path_progression]:
+	for item in upgrade_path[path_number]:
 		get(item).writable=true
 		popup_text+= item+", "
-	
-	popup_text+="[color=black]useful."
+	popup_text = popup_text.trim_suffix(", ")
+	popup_text+=" [color=black]useful."
 	popup_text+= "[color=red] Use the variables command to see what they are.[color=black]"
 	dialogue_box.buffer_dialogue(popup_text)
-	next_upgrade_path_progression+=1
 
 class command:
 	var aliases
@@ -165,7 +162,9 @@ func complete_restart(go_to_menu = false):
 	else:
 		restart()
 
+var level = 1
 func go_to_next_level():
 	# TODO
-	if get_tree().change_scene("res://UI/End Screen/End Screen.tscn") != OK:
+	level += 1
+	if get_tree().change_scene("res://World/Levels/Level%s.tscn" % level) != OK:
 		print_debug("An error occurred while attempting to go to the next level.")

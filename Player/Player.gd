@@ -60,6 +60,11 @@ func movement(delta):
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.name == "Spikes":
+			die()
+	
 	if is_on_floor():
 		can_jump = true
 		coyote_timer = 0
@@ -78,7 +83,7 @@ func movement(delta):
 		velocity.y -= global.player_jump_speed.real_value if not global.player_fly.real_value else global.player_fly_speed.real_value
 
 func check_if_in_void():
-	if position.y >= 4000:
+	if position.y >= 1000:
 		global.restart()
 
 func animate():

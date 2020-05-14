@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tiles/Tile Set.tres" type="TileSet" id=2]
+[ext_resource path="res://World/Levels/Level.gd" type="Script" id=3]
+[ext_resource path="res://World/Tutorial/TileMap.gd" type="Script" id=6]
+[ext_resource path="res://Sky/Sky.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Tiles/Spikes.tres" type="TileSet" id=8]
+
+[node name="Level3" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Sky" parent="." instance=ExtResource( 7 )]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 131069, 10, 0, 131070, 11, 0, 131071, 11, 0, 65536, 11, 0, 65537, 11, 0, 65538, 0, 2, 196605, 13, 0, 196606, 14, 0, 196607, 14, 0, 131072, 14, 0, 131073, 14, 0, 131074, 0, 65538, 262141, 16, 0, 262142, 17, 0, 262143, 17, 0, 196608, 17, 0, 196609, 17, 0, 196610, 18, 0 )
+script = ExtResource( 6 )
+
+[node name="Spikes" type="TileMap" parent="."]
+tile_set = ExtResource( 8 )
+collision_layer = 32
+collision_mask = 0
+format = 1
+
+[node name="Flags" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+light_mask = 3
+
+[node name="Enemies" type="Node2D" parent="."]
