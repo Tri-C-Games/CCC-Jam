@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-onready var raycast = get_node("RayCast2D")
 onready var anim_sprite = get_node("AnimatedSprite")
+onready var raycast = get_node("RayCast2D")
 onready var right_raycast = get_node("Right Raycast")
 onready var left_raycast = get_node("Left Raycast")
 onready var up_raycast = get_node("Up Raycast")
@@ -16,11 +16,15 @@ func _physics_process(delta):
 	animate()
 
 func movement(delta):
-	velocity.x = global.enemy_max_speed.real_value * dir
+	if is_on_floor():
+		velocity.x = global.enemy_max_speed.real_value * dir
+	else:
+		velocity.x = 0
 	velocity.y += global.gravity.real_value * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	if raycast.is_colliding() == false:
+	var ray_cast_colliding = raycast.is_colliding()
+	if not ray_cast_colliding and is_on_floor():
 		dir *= LEFT
 		raycast.position.x *= LEFT
 	
@@ -35,8 +39,10 @@ func movement(delta):
 func animate():
 	if abs(velocity.x) > 0:
 		anim_sprite.flip_h = velocity.x < 0
-		
+		anim_sprite.frames.set_animation_loop("Walk", true)
 		anim_sprite.play("Walk")
+	else:
+		anim_sprite.frames.set_animation_loop("Walk", false)
 
 func die():
 	queue_free()
