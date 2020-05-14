@@ -76,11 +76,12 @@ func _on_Stop_Dialogue_Timer_timeout():
 	kill_dialogue()
 
 func _on_Button_pressed():
+	key_press_sfx.play()
 	if rich_text_label.visible_characters == rich_text_label.get_total_character_count():
 		if dialogue_buffer.size() == 0:
 			kill_dialogue()
 		else:
 			set_next_dialogue()
 	else:
+		increment_timer.paused = false
 		rich_text_label.visible_characters = rich_text_label.get_total_character_count()
-		key_press_sfx.play()

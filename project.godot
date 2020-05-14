@@ -15,18 +15,16 @@ _global_script_class_icons={
 
 [application]
 
-config/name="CCC Jam"
+config/name="Maryo"
 run/main_scene="res://UI/MainMenu/MainMenu.tscn"
-boot_splash/bg_color=Color( 0.352941, 0.627451, 1, 1 )
+boot_splash/image="res://README/CCC Jam.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.113725, 0.121569, 0.129412, 1 )
 config/icon="res://Sprites/Terminal/Terminal.png"
 
 [autoload]
 
 global="*res://global.gd"
-
-[debug]
-
-gdscript/completion/autocomplete_setters_and_getters=true
 
 [importer_defaults]
 

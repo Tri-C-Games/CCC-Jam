@@ -17,11 +17,15 @@ var next_upgrade_path_progression:int=0
 
 var upgrade_path= [["gravity", "player_jump_speed"]]
 
-func upgrade():
-	#TODO: POPUP
+func upgrade(dialogue_box):
+	var popup_text= "Hey, I just remembered! Maybe you would find the vars [color=blue]"
 	for item in upgrade_path[next_upgrade_path_progression]:
 		get(item).writable=true
-		
+		popup_text+= item+", "
+	
+	popup_text+="[color=black]useful."
+	popup_text+= "[color=red] Use the variables command to see what they are.[color=black]"
+	dialogue_box.buffer_dialogue(popup_text)
 	next_upgrade_path_progression+=1
 
 class command:
@@ -45,16 +49,22 @@ class command:
 
 class gamevar:
 	var aliases
+	var default_value:String
 	var value:String setget set_real_value
 	var real_value
+	var min_real_value
+	var max_real_value
 	var type:String
 	var description:String
 	var writable:bool
 	
-	func _init(_aliases = [], _value = "", _type = "Number", _description = "", _writable = false):
+	func _init(_min_real_value, _max_real_value, _aliases = [], _value = "", _type = "Number", _description = "", _writable = false):
+		self.min_real_value = _min_real_value
+		self.max_real_value = _max_real_value
 		self.aliases = _aliases
 		self.type = _type
 		self.value = _value
+		self.default_value = self.value
 		self.description = _description
 		self.writable = _writable
 		global.gamevars_list.append(self)
@@ -71,6 +81,8 @@ class gamevar:
 		match self.type:
 			"Number":
 				self.real_value = float(value) if value.is_valid_float() else 0.0
+				if self.min_real_value != null and self.max_real_value != null:
+					self.real_value = clamp(self.real_value, self.min_real_value, self.max_real_value)
 			"True/False":
 				self.real_value = true if value == "true" else false
 	
@@ -79,6 +91,10 @@ class gamevar:
 			for alias in gamevar.aliases:
 				if name == alias and gamevar.writable:
 					return gamevar
+	
+	static func reset_gamevars():
+		for gamevar in global.gamevars_list:
+			gamevar.value = gamevar.default_value
 
 #Commands
 onready var help_command = command.new(["help", "info", "tutorial"], "Display a list of commands", 1,
@@ -91,33 +107,33 @@ onready var get_command = command.new(["get", "return"], "Return a specified var
 "get [variable name]")
 onready var exit_command = command.new(["exit", "quit", "stop"], "Exit the developer console", 1,
 "exit - What did you expect this to tell you? It just exits the menu.")
-onready var restart_command = command.new(["restart", "redo", "reset"], "Restart the game", 1,
+onready var restart_command = command.new(["restart", "redo", "reset"], "Completely restart the game", 1,
 "restart - What did you expect this to tell you? It just restarts the game.")
 
 #Game Vars
-onready var gravity = gamevar.new(["gravity"], "1800", "Number",
+onready var gravity = gamevar.new(-99999, 99999, ["gravity"], "1800", "Number",
 "The value of gravity")
 
 #Player Vars
-onready var player_fly = gamevar.new(["player_fly", "fly"], "false", "True/False",
+onready var player_fly = gamevar.new(null, null, ["player_fly", "fly"], "false", "True/False",
 "Whether or not the player can fly")
-onready var player_fly_speed = gamevar.new(["player_fly_speed", "fly_speed"], "50", "Number",
+onready var player_fly_speed = gamevar.new(-99999, 99999, ["player_fly_speed", "fly_speed"], "50", "Number",
 "How fast the player flies")
-onready var player_max_speed = gamevar.new(["player_max_speed", "player_speed", "speed"], "700", "Number",
+onready var player_max_speed = gamevar.new(-99999, 99999, ["player_max_speed", "player_speed", "speed"], "700", "Number",
 "The maximum speed at which the player can move")
-onready var player_max_acc = gamevar.new(["player_max_acc", "player_acc", "acc"], "70", "Number",
+onready var player_max_acc = gamevar.new(-99999, 99999, ["player_max_acc", "player_acc", "acc"], "70", "Number",
 "The maximum acceleration the player can be applying")
-onready var player_max_friction = gamevar.new(["player_max_friction", "player_friction", "friction"], "60", "Number",
+onready var player_max_friction = gamevar.new(-99999, 99999, ["player_max_friction", "player_friction", "friction"], "60", "Number",
 "The maximum friction that can be applied to the player")
-onready var player_jump_speed = gamevar.new(["player_jump_speed", "player_jump", "jump"], "900", "Number",
+onready var player_jump_speed = gamevar.new(-99999, 99999, ["player_jump_speed", "player_jump", "jump"], "900", "Number",
 "The speed (or force) applied to the player when jumping")
-onready var player_health = gamevar.new(["player_health", "health", "hp"], "100", "Number",
+onready var player_health = gamevar.new(-99999, 99999, ["player_health", "health", "hp"], "100", "Number",
 "The health that the player has")
-onready var player_damage_bounce = gamevar.new(["player_damage_bounce", "damage_bounce", "bounce", "enemy_bounce"], "500", "Number",
+onready var player_damage_bounce = gamevar.new(-99999, 99999, ["player_damage_bounce", "damage_bounce", "bounce", "enemy_bounce"], "500", "Number",
 "The amount of knockback the player receives when the player kills an enemy")
 
 #Enemy Vars
-onready var enemy_max_speed = gamevar.new(["enemy_max_speed", "enemy_speed"], "150", "Number",
+onready var enemy_max_speed = gamevar.new(-99999, 99999, ["enemy_max_speed", "enemy_speed"], "150", "Number",
 "The maximum speed at which the enemy can move")
 
 func random_int(minimum, maximum):
@@ -136,7 +152,20 @@ func place_tiles(tilemap, width, base_pos = Vector2(0, 0)):
 			else:
 				tilemap.set_cellv(final_pos, global.tiles.TILE_MIDDLE)
 
+func restart():
+	if get_tree().reload_current_scene() != OK:
+		print_debug("An error occurred while attempting to reload the current scene.")
+
+func complete_restart(go_to_menu = false):
+	global.can_open_console = false
+	global.gamevar.reset_gamevars()
+	if go_to_menu:
+		if get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn") != OK:
+			print_debug("An error occurred while attempting to go to the main menu.")
+	else:
+		restart()
+
 func go_to_next_level():
 	# TODO
-	if get_tree().change_scene("res://World/Levels/Level2.tscn") != OK:
+	if get_tree().change_scene("res://UI/End Screen/End Screen.tscn") != OK:
 		print_debug("An error occurred while attempting to go to the next level.")

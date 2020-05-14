@@ -6,7 +6,6 @@ onready var middle_raycast = get_node("Middle RayCast")
 onready var right_raycast = get_node("Right RayCast")
 onready var raycasts = [left_raycast, middle_raycast, right_raycast]
 onready var collision_shape = get_node("CollisionShape2D")
-onready var can_jump_area2d = get_node("Can Jump Area2D")
 
 var velocity = Vector2()
 var jump_pressed = false
@@ -21,12 +20,16 @@ const COYOTE_MAX_TIME = 0.1
 var coyote_timer = 0
 var can_jump = false
 
+var pressedTime = 0.3 #in seconds, anti input frustration value
+var jumpPressedTimer=10
+
 var input_velocity = 0
 
 func _physics_process(delta):
 	input_velocity = 0
 	get_input()
 	movement(delta)
+	check_if_in_void()
 	animate()
 
 func get_input():
@@ -46,7 +49,7 @@ func get_input():
 		jump_pressed = true
 
 func movement(delta):
-	if not is_on_floor() and global.gravity.real_value > 0:
+	if not is_on_floor() if global.gravity.real_value > 0 else true:
 		velocity.y += global.gravity.real_value * delta
 	
 	# Friction
@@ -57,17 +60,26 @@ func movement(delta):
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	if can_jump_area2d.get_overlapping_bodies():
+	if is_on_floor():
 		can_jump = true
 		coyote_timer = 0
 	else:
 		coyote_timer += delta
+		jumpPressedTimer+=delta
 	
 	if coyote_timer > COYOTE_MAX_TIME:
 		can_jump = false
 	
-	if (can_jump || global.player_fly.real_value) and jump_pressed:
+	if jump_pressed:
+		jumpPressedTimer=0
+	
+	if (can_jump || global.player_fly.real_value) and jump_pressed and jumpPressedTimer<=pressedTime:
+		jumpPressedTimer=1000
 		velocity.y -= global.player_jump_speed.real_value if not global.player_fly.real_value else global.player_fly_speed.real_value
+
+func check_if_in_void():
+	if position.y >= 4000:
+		global.restart()
 
 func animate():
 	var moving = abs(velocity.x) > 0
