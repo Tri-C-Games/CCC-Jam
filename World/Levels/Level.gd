@@ -8,5 +8,5 @@ func _ready():
 	if not global.can_open_console:
 		hud.enable_open_console()
 	
-	global.upgrade(dialogue_box, global.level - 1)
+	global.upgrade(dialogue_box, global.level - 1, true)
 	dialogue_box.start_dialogue()

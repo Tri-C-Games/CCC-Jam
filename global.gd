@@ -15,15 +15,13 @@ var gamevars_list = []
 
 var upgrade_path= [["gravity", "player_jump_speed"], ["player_max_speed", "player_max_acc"]]
 
-func upgrade(dialogue_box, path_number):
-	var popup_text= "Hey, I just remembered! Maybe you would find the vars [color=blue]"
+func upgrade(dialogue_box, path_number, display_dialogue = false):
 	for item in upgrade_path[path_number]:
 		get(item).writable=true
-		popup_text+= item+", "
-	popup_text = popup_text.trim_suffix(", ")
-	popup_text+=" [color=black]useful."
-	popup_text+= "[color=red] Use the variables command to see what they are.[color=black]"
-	dialogue_box.buffer_dialogue(popup_text)
+	
+	if display_dialogue:
+		var text = "I have added some new variables that you can now use!"
+		dialogue_box.buffer_dialogue(text)
 
 class command:
 	var aliases

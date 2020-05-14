@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Tile Set.tres" type="TileSet" id=2]
 [ext_resource path="res://World/Levels/Level.gd" type="Script" id=3]
-[ext_resource path="res://Flag/Flag.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Tutorial/TileMap.gd" type="Script" id=6]
 [ext_resource path="res://Sky/Sky.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Tiles/Spikes.tres" type="TileSet" id=8]
@@ -18,7 +16,7 @@ script = ExtResource( 3 )
 tile_set = ExtResource( 2 )
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -196612, 0, 0, -196611, 11, 0, -196610, 11, 0, -196609, 11, 0, -262144, 11, 0, -262143, 11, 0, -262142, 11, 0, -262141, 11, 0, -262140, 11, 0, -262139, 11, 0, -262138, 11, 0, -262137, 11, 0, -262136, 11, 0, -262135, 11, 0, -262134, 11, 0, -262133, 11, 0, -262132, 11, 0, -262131, 11, 0, -262130, 11, 0, -262129, 11, 0, -262128, 11, 0, -262127, 11, 0, -262126, 11, 0, -262125, 11, 0, -262124, 12, 0, -131076, 16, 0, -131075, 17, 0, -131074, 17, 0, -131073, 17, 0, -196608, 17, 0, -196607, 17, 0, -196606, 17, 0, -196605, 17, 0, -196604, 17, 0, -196603, 17, 0, -196602, 17, 0, -196601, 17, 0, -196600, 17, 0, -196599, 17, 0, -196598, 17, 0, -196597, 17, 0, -196596, 17, 0, -196595, 17, 0, -196594, 17, 0, -196593, 17, 0, -196592, 17, 0, -196591, 17, 0, -196590, 17, 0, -196589, 17, 0, -196588, 18, 0, 5, 0, 0, 6, 0, 2, 19, 0, 0, 20, 0, 2, 131069, 10, 0, 131070, 11, 0, 131071, 11, 0, 65536, 11, 0, 65537, 11, 0, 65538, 0, 2, 65541, 0, 65536, 65542, 0, 65538, 65555, 0, 65536, 65556, 0, 65538, 196605, 13, 0, 196606, 14, 0, 196607, 14, 0, 131072, 14, 0, 131073, 14, 0, 131074, 0, 65538, 131077, 0, 65536, 131078, 4, 65536, 131079, 11, 0, 131080, 11, 0, 131081, 11, 0, 131082, 11, 0, 131083, 11, 0, 131084, 11, 0, 131085, 11, 0, 131086, 11, 0, 131087, 11, 0, 131088, 11, 0, 131089, 11, 0, 131090, 11, 0, 131091, 4, 65537, 131092, 0, 65538, 262141, 16, 0, 262142, 17, 0, 262143, 17, 0, 196608, 17, 0, 196609, 17, 0, 196610, 18, 0, 196613, 0, 131072, 196614, 17, 0, 196615, 17, 0, 196616, 17, 0, 196617, 17, 0, 196618, 17, 0, 196619, 17, 0, 196620, 17, 0, 196621, 17, 0, 196622, 17, 0, 196623, 17, 0, 196624, 17, 0, 196625, 17, 0, 196626, 17, 0, 196627, 17, 0, 196628, 0, 131074 )
+tile_data = PoolIntArray( 131069, 10, 0, 131070, 11, 0, 131071, 11, 0, 65536, 11, 0, 65537, 11, 0, 65538, 0, 2, 196605, 13, 0, 196606, 14, 0, 196607, 14, 0, 131072, 14, 0, 131073, 14, 0, 131074, 0, 65538, 262141, 16, 0, 262142, 17, 0, 262143, 17, 0, 196608, 17, 0, 196609, 17, 0, 196610, 18, 0 )
 script = ExtResource( 6 )
 
 [node name="Spikes" type="TileMap" parent="."]
@@ -26,83 +24,10 @@ tile_set = ExtResource( 8 )
 collision_layer = 32
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -131065, 1610612736, 0, -131064, 1610612736, 0, -131063, 1610612736, 0, -131062, 1610612736, 0, -131061, 1610612736, 0, -131060, 1610612736, 0, -131059, 1610612736, 0, -131058, 1610612736, 0, -131057, 1610612736, 0, -131056, 1610612736, 0, -131055, 1610612736, 0 )
 
 [node name="Flags" type="Node2D" parent="."]
-
-[node name="Flag" parent="Flags" instance=ExtResource( 4 )]
-position = Vector2( 1272, -64 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 light_mask = 3
 
 [node name="Enemies" type="Node2D" parent="."]
-
-[node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 472, 88 )
-
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 536, 88 )
-
-[node name="Enemy3" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 592, 88 )
-
-[node name="Enemy4" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 656, 88 )
-
-[node name="Enemy5" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 720, 88 )
-
-[node name="Enemy6" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 784, 88 )
-
-[node name="Enemy7" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 848, 88 )
-
-[node name="Enemy8" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 912, 88 )
-
-[node name="Enemy9" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 976, 88 )
-
-[node name="Enemy10" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1040, 88 )
-
-[node name="Enemy11" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1104, 88 )
-
-[node name="Enemy12" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1168, 88 )
-
-[node name="Enemy13" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1128, 88 )
-
-[node name="Enemy14" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1064, 88 )
-
-[node name="Enemy15" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1000, 88 )
-
-[node name="Enemy16" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 936, 88 )
-
-[node name="Enemy17" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 872, 88 )
-
-[node name="Enemy18" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 808, 88 )
-
-[node name="Enemy19" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 752, 88 )
-
-[node name="Enemy20" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 680, 88 )
-
-[node name="Enemy21" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 616, 88 )
-
-[node name="Enemy22" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 560, 88 )
-
-[node name="Enemy23" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 504, 88 )
