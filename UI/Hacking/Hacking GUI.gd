@@ -92,7 +92,7 @@ func parse_command(text):
 				return
 			
 			var num = int(level_number)
-			if not num in [1, 2, 3, 4, 5]:
+			if not num in [1, 2, 3, 4, 5, 6]:
 				console.output_error("That level does not exist!")
 				return
 			global.go_to_level(num)
