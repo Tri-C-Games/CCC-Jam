@@ -15,8 +15,7 @@ var artifact_frequencies = [
 ]
 
 func _ready():
-	if not global.can_open_console:
-		hud.enable_open_console()
+	hud.enable_open_console()
 	
 	global.upgrade(dialogue_box, global.level - 1, true)
 	
