@@ -130,6 +130,11 @@ func animate():
 	else:
 		anim_sprite.play("Idle")
 
+func hurt(damage):
+	global.player_health.value = str(int(global.player_health.value) - damage)
+	if global.player_health.real_value < 0:
+		die()
+
 func die():
 	if get_tree().reload_current_scene() != OK:
 		print_debug("An error occured while attempting to reload the current scene.")

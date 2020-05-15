@@ -128,7 +128,7 @@ onready var player_max_friction = gamevar.new(-99999, 99999, ["player_max_fricti
 "The maximum friction that can be applied to the player")
 onready var player_jump_speed = gamevar.new(-99999, 99999, ["player_jump_speed", "player_jump", "jump"], "900", "Number",
 "The speed (or force) applied to the player when jumping")
-onready var player_health = gamevar.new(-99999, 99999, ["player_health", "health", "hp"], "100", "Number",
+onready var player_health = gamevar.new(-99999, 99999, ["player_health", "health", "hp"], "1", "Number",
 "The health that the player has")
 onready var player_damage_bounce = gamevar.new(-99999, 99999, ["player_damage_bounce", "damage_bounce", "bounce", "enemy_bounce"], "500", "Number",
 "The amount of knockback the player receives when the player kills an enemy")

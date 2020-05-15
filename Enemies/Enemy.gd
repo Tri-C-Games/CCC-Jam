@@ -63,4 +63,4 @@ func _on_Die_Zone_body_entered(body):
 
 func _on_Kill_Zone_body_entered(body):
 	if body.name == "Player" and not dead:
-		body.die()
+		body.hurt(1)
