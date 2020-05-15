@@ -7,6 +7,7 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
+shader_param/frequency = 0.7
 shader_param/artifact_noise_texture = ExtResource( 3 )
 shader_param/simplex_noise_texture = ExtResource( 4 )
 
