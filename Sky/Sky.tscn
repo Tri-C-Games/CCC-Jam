@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Sky/Sky 2.png" type="Texture" id=1]
 [ext_resource path="res://Sky/Sky 1.png" type="Texture" id=2]
 [ext_resource path="res://Sky/Sky.gd" type="Script" id=3]
+[ext_resource path="res://Sky/Sky 3.png" type="Texture" id=4]
 
 [node name="Sky" type="ParallaxBackground"]
 script = ExtResource( 3 )
@@ -12,6 +13,13 @@ motion_mirroring = Vector2( 1920, 1080 )
 
 [node name="Sprite" type="Sprite" parent="Background"]
 texture = ExtResource( 2 )
+centered = false
+
+[node name="Clouds2" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 1920, 1080 )
+
+[node name="Sprite" type="Sprite" parent="Clouds2"]
+texture = ExtResource( 4 )
 centered = false
 
 [node name="Clouds" type="ParallaxLayer" parent="."]
