@@ -82,7 +82,6 @@ func _on_Button_pressed():
 		if dialogue_buffer.size() == 0:
 			kill_dialogue()
 		else:
-			dialogue_buffer.erase(dialogue_buffer[0])
 			set_next_dialogue()
 	else:
 		increment_timer.paused = false
