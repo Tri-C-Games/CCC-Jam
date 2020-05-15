@@ -56,9 +56,10 @@ func _on_Next_Dialogue_Timer_timeout():
 	set_next_dialogue()
 
 func set_next_dialogue():
-	increment_timer.paused = false
-	rich_text_label.bbcode_text = dialogue_buffer[0]
-	rich_text_label.visible_characters = 0
+	if dialogue_buffer.size() > 0:
+		increment_timer.paused = false
+		rich_text_label.bbcode_text = dialogue_buffer[0]
+		rich_text_label.visible_characters = 0
 
 func stop_dialogue():
 	increment_timer.stop()
