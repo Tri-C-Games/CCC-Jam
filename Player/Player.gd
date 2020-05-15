@@ -31,6 +31,15 @@ func _physics_process(delta):
 	movement(delta)
 	check_if_in_void()
 	animate()
+	set_player_scale()
+
+func set_player_scale():
+	$AnimatedSprite.scale = 3 * Vector2(global.player_size.real_value, global.player_size.real_value)
+	$CollisionShape2D.shape.extents = Vector2(20, 29) * global.player_size.real_value
+	$"Left RayCast".position = Vector2(-16, 0) * global.player_size.real_value
+	$"Right RayCast".position = Vector2(16, 0) * global.player_size.real_value
+	for raycast in raycasts:
+		raycast.cast_to = Vector2(0, 80) * global.player_size.real_value
 
 func get_input():
 	# Movement

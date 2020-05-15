@@ -23,6 +23,10 @@ func upgrade(dialogue_box, path_number, display_dialogue = false):
 		var text = "I have added some new variables that you can now use!"
 		dialogue_box.buffer_dialogue(text)
 
+func unlock_all_vars():
+	for gamevar in global.gamevars_list:
+		gamevar.writable = true
+
 class command:
 	var aliases
 	var description:String
@@ -126,6 +130,8 @@ onready var player_health = gamevar.new(-99999, 99999, ["player_health", "health
 "The health that the player has")
 onready var player_damage_bounce = gamevar.new(-99999, 99999, ["player_damage_bounce", "damage_bounce", "bounce", "enemy_bounce"], "500", "Number",
 "The amount of knockback the player receives when the player kills an enemy")
+onready var player_size = gamevar.new(null, null, ["player_size", "player_scale", "size", "scale"], "1", "Number",
+"A multiplier for how big the player is")
 
 #Enemy Vars
 onready var enemy_max_speed = gamevar.new(-99999, 99999, ["enemy_max_speed", "enemy_speed"], "150", "Number",
