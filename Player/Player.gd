@@ -32,6 +32,7 @@ func _physics_process(delta):
 	check_if_in_void()
 	animate()
 	set_player_scale()
+	Engine.time_scale = global.time_scale.real_value
 
 func set_player_scale():
 	$AnimatedSprite.scale = 3 * Vector2(global.player_size.real_value, global.player_size.real_value)

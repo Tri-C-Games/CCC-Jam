@@ -112,6 +112,8 @@ onready var restart_command = command.new(["restart", "redo", "reset"], "Complet
 #Game Vars
 onready var gravity = gamevar.new(-99999, 99999, ["gravity"], "1800", "Number",
 "The value of gravity")
+onready var time_scale = gamevar.new(null, null, ["time_scale", "time"], "1", "Number",
+"A multiplier for the rate of time")
 
 #Player Vars
 onready var player_fly = gamevar.new(null, null, ["player_fly", "fly"], "false", "True/False",
