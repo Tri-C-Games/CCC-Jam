@@ -25,6 +25,7 @@ config/icon="res://Sprites/Terminal/Terminal.png"
 [autoload]
 
 global="*res://global.gd"
+Music="*res://Music/Music.tscn"
 
 [importer_defaults]
 
