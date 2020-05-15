@@ -13,7 +13,7 @@ enum tiles {
 var commands_list = []
 var gamevars_list = []
 
-var upgrade_path= [["gravity", "player_jump_speed"], ["player_max_speed", "player_max_acc"]]
+var upgrade_path = [["gravity", "player_jump_speed"], ["player_size"], ["player_max_speed", "player_max_acc"]]
 
 func upgrade(dialogue_box, path_number, display_dialogue = false):
 	for item in upgrade_path[path_number]:

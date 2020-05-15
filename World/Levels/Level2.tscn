@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Tile Set.tres" type="TileSet" id=2]
 [ext_resource path="res://World/Levels/Level.gd" type="Script" id=3]
+[ext_resource path="res://Flag/Flag.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Tutorial/TileMap.gd" type="Script" id=6]
 [ext_resource path="res://Sky/Sky.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Tiles/Spikes.tres" type="TileSet" id=8]
@@ -16,7 +17,7 @@ script = ExtResource( 3 )
 tile_set = ExtResource( 2 )
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 131069, 10, 0, 131070, 11, 0, 131071, 11, 0, 65536, 11, 0, 65537, 11, 0, 65538, 0, 2, 196605, 13, 0, 196606, 14, 0, 196607, 14, 0, 131072, 14, 0, 131073, 14, 0, 131074, 0, 65538, 262141, 16, 0, 262142, 17, 0, 262143, 17, 0, 196608, 17, 0, 196609, 17, 0, 196610, 18, 0 )
+tile_data = PoolIntArray( -131075, 4, 0, -131074, 17, 0, -131073, 17, 0, -196608, 17, 0, -196607, 17, 0, -196606, 17, 0, -196605, 17, 0, -196604, 17, 0, -196603, 17, 0, -196602, 17, 0, -196601, 4, 1, -65539, 15, 0, -131069, 2, 0, -131065, 13, 0, -3, 15, 0, -65533, 2, 65536, -65529, 13, 0, 65533, 15, 0, 3, 2, 131072, 7, 13, 0, 131069, 4, 65536, 131070, 8, 0, 131071, 8, 0, 65536, 8, 0, 65537, 8, 0, 65538, 8, 0, 65539, 8, 0, 65540, 8, 0, 65541, 8, 0, 65542, 8, 0, 65543, 4, 65537 )
 script = ExtResource( 6 )
 
 [node name="Spikes" type="TileMap" parent="."]
@@ -26,6 +27,9 @@ collision_mask = 0
 format = 1
 
 [node name="Flags" type="Node2D" parent="."]
+
+[node name="Flag" parent="Flags" instance=ExtResource( 4 )]
+position = Vector2( 376, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 light_mask = 3
