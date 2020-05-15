@@ -26,6 +26,7 @@ config/icon="res://Sprites/Terminal/Terminal.png"
 
 global="*res://global.gd"
 Music="*res://Music/Music.tscn"
+GlobalScreenShaders="*res://Shaders/Global Screen Shaders.tscn"
 
 [importer_defaults]
 
