@@ -61,4 +61,3 @@ position = Vector2( 2240, 64 )
 
 [node name="Barrier" type="Position2D" parent="."]
 position = Vector2( 2176, -512 )
-[connection signal="body_entered" from="Flags/Flag" to="." method="_on_Flag_body_entered"]

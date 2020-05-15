@@ -171,5 +171,6 @@ func complete_restart(go_to_menu = false):
 var level = 1
 func go_to_next_level():
 	level += 1
+	
 	if get_tree().change_scene("res://World/Levels/Level%s.tscn" % level) != OK:
 		print_debug("An error occurred while attempting to go to the next level.")
