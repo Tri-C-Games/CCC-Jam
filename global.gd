@@ -13,7 +13,7 @@ enum tiles {
 var commands_list = []
 var gamevars_list = []
 
-var upgrade_path = [["gravity", "player_jump_speed"], ["player_size"], ["player_max_speed", "player_max_acc"]]
+var upgrade_path = [["gravity", "player_jump_speed"], ["player_size"], ["player_health"], ["player_max_speed", "player_max_acc"], ["time_scale"]]
 
 func upgrade(dialogue_box, path_number, display_dialogue = false):
 	for item in upgrade_path[path_number]:
@@ -118,7 +118,7 @@ onready var time_scale = gamevar.new(null, null, ["time_scale", "time"], "1", "N
 #Player Vars
 onready var player_fly = gamevar.new(null, null, ["player_fly", "fly"], "false", "True/False",
 "Whether or not the player can fly")
-onready var player_fly_speed = gamevar.new(-99999, 99999, ["player_fly_speed", "fly_speed"], "50", "Number",
+onready var player_fly_speed = gamevar.new(-99999, 99999, ["player_fly_speed", "fly_speed"], "900", "Number",
 "How fast the player flies")
 onready var player_max_speed = gamevar.new(-99999, 99999, ["player_max_speed", "player_speed", "speed"], "700", "Number",
 "The maximum speed at which the player can move")
