@@ -4,10 +4,10 @@
 [ext_resource path="res://Font/pixeljosh6.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
-size = 128
+size = 64
 font_data = ExtResource( 2 )
 
-[node name="MainMenu" type="MarginContainer"]
+[node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -15,9 +15,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
-margin_right = 1024.0
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+split_offset = 585
+dragger_visibility = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="HSplitContainer"]
+margin_right = 436.0
 margin_bottom = 600.0
 custom_fonts/font = SubResource( 1 )
 text = "Play"
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+
+[node name="Button2" type="Button" parent="HSplitContainer"]
+margin_left = 436.0
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_fonts/font = SubResource( 1 )
+text = "Skip to sandbox"
+[connection signal="pressed" from="HSplitContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="HSplitContainer/Button2" to="." method="_on_Button2_pressed"]

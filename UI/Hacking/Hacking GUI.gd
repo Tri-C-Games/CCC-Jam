@@ -9,6 +9,7 @@ var not_recognised_command_text = "\'%s\' is not recognised as an internal or ex
 var not_recognised_variable_text = "\'%s\' is not recognised as an internal or external variable. Please see the \'variables\' command."
 
 func _on_Console_command_entered(command):
+	$"Enter SFX".play()
 	parse_command(command)
 
 func parse_command(text):
@@ -95,4 +96,12 @@ func restart():
 	global.complete_restart()
 
 func _on_Console_input_text_changed():
-	$"Key Press SFX".play()
+	var text = console.get_node("VBoxContainer/Input").text
+	if text.length() > 0:
+		var new_char = text[-1]
+		if new_char == " ":
+			$"Space Press SFX".play()
+		else:
+			[$"Key Press SFX", $"Key Press 2 SFX"][global.random_int(0, 2)].play()
+	else:
+		[$"Key Press SFX", $"Key Press 2 SFX"][global.random_int(0, 2)].play()

@@ -31,6 +31,16 @@ func _physics_process(delta):
 	movement(delta)
 	check_if_in_void()
 	animate()
+	set_player_scale()
+	Engine.time_scale = global.time_scale.real_value
+
+func set_player_scale():
+	$AnimatedSprite.scale = 3 * Vector2(global.player_size.real_value, global.player_size.real_value)
+	$CollisionShape2D.shape.extents = Vector2(20, 29) * global.player_size.real_value
+	$"Left RayCast".position = Vector2(-16, 0) * global.player_size.real_value
+	$"Right RayCast".position = Vector2(16, 0) * global.player_size.real_value
+	for raycast in raycasts:
+		raycast.cast_to = Vector2(0, 80) * global.player_size.real_value
 
 func get_input():
 	# Movement
@@ -60,6 +70,11 @@ func movement(delta):
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.name == "Spikes":
+			die()
+	
 	if is_on_floor():
 		can_jump = true
 		coyote_timer = 0
@@ -74,11 +89,15 @@ func movement(delta):
 		jumpPressedTimer=0
 	
 	if (can_jump || global.player_fly.real_value) and jump_pressed and jumpPressedTimer<=pressedTime:
-		jumpPressedTimer=1000
-		velocity.y -= global.player_jump_speed.real_value if not global.player_fly.real_value else global.player_fly_speed.real_value
+		jump()
+
+func jump():
+	jumpPressedTimer=1000
+	velocity.y -= global.player_jump_speed.real_value if not global.player_fly.real_value else global.player_fly_speed.real_value
+	$"Jump SFX".play()
 
 func check_if_in_void():
-	if position.y >= 4000:
+	if position.y >= 1000:
 		global.restart()
 
 func animate():
@@ -110,6 +129,11 @@ func animate():
 		anim_sprite.play("Walk")
 	else:
 		anim_sprite.play("Idle")
+
+func hurt(damage):
+	global.player_health.value = str(int(global.player_health.value) - damage)
+	if global.player_health.real_value < 0:
+		die()
 
 func die():
 	if get_tree().reload_current_scene() != OK:

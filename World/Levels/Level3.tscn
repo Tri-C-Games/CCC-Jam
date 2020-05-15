@@ -1,0 +1,210 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tiles/Tile Set.tres" type="TileSet" id=2]
+[ext_resource path="res://World/Levels/Level.gd" type="Script" id=3]
+[ext_resource path="res://Flag/Flag.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/Tutorial/TileMap.gd" type="Script" id=6]
+[ext_resource path="res://Sky/Sky.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Tiles/Spikes.tres" type="TileSet" id=8]
+
+[node name="Level3" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Sky" parent="." instance=ExtResource( 7 )]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 3, 2, 0, 131069, 1, 0, 131070, 8, 0, 131071, 8, 0, 65536, 8, 0, 65537, 8, 0, 65538, 4, 65537, 65539, 14, 0, 65540, 4, 65536, 65541, 8, 0, 65542, 8, 0, 65543, 8, 0, 65544, 8, 0, 65545, 8, 0, 65546, 8, 0, 65547, 8, 0, 65548, 8, 0, 65549, 8, 0, 65550, 8, 0, 65551, 8, 0, 65552, 8, 0, 65553, 8, 0, 65554, 8, 0, 65555, 8, 0, 65556, 8, 0, 65557, 8, 0, 65558, 8, 0, 65559, 8, 0, 65560, 8, 0, 65561, 8, 0, 65562, 8, 0, 65563, 8, 0, 65564, 8, 0, 65565, 8, 0, 65566, 8, 0, 65567, 8, 0, 65568, 8, 0, 65569, 9, 0 )
+script = ExtResource( 6 )
+
+[node name="Spikes" type="TileMap" parent="."]
+tile_set = ExtResource( 8 )
+collision_layer = 32
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -589793, -1073741824, 0, -524257, -1073741824, 0, -458721, -1073741824, 0, -393185, -1073741824, 0, -327649, -1073741824, 0, -262113, -1073741824, 0, -196577, -1073741824, 0, -131041, -1073741824, 0 )
+
+[node name="Flags" type="Node2D" parent="."]
+
+[node name="Flag" parent="Flags" instance=ExtResource( 4 )]
+position = Vector2( 2064, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+light_mask = 3
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 376, 24 )
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 536, 8 )
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 760, 24 )
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 960, 24 )
+
+[node name="Enemy5" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1152, 8 )
+
+[node name="Enemy6" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1288, 0 )
+
+[node name="Enemy7" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1512, 8 )
+
+[node name="Enemy8" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1688, 8 )
+
+[node name="Enemy9" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1440, -24 )
+
+[node name="Enemy10" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1224, 32 )
+
+[node name="Enemy11" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 824, -8 )
+
+[node name="Enemy12" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 552, -16 )
+
+[node name="Enemy13" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 352, -16 )
+
+[node name="Enemy14" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 496, -24 )
+
+[node name="Enemy15" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 728, -32 )
+
+[node name="Enemy16" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 920, -24 )
+
+[node name="Enemy17" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1072, -24 )
+
+[node name="Enemy18" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1384, -24 )
+
+[node name="Enemy19" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1448, -80 )
+
+[node name="Enemy20" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1520, -184 )
+
+[node name="Enemy21" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1808, -216 )
+
+[node name="Enemy22" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1760, -48 )
+
+[node name="Enemy23" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1632, -56 )
+
+[node name="Enemy24" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1632, -56 )
+
+[node name="Enemy25" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1352, -96 )
+
+[node name="Enemy26" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1064, -88 )
+
+[node name="Enemy27" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 720, -136 )
+
+[node name="Enemy28" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 488, -120 )
+
+[node name="Enemy29" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 592, -32 )
+
+[node name="Enemy30" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 864, -160 )
+
+[node name="Enemy31" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1360, -112 )
+
+[node name="Enemy32" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1504, -224 )
+
+[node name="Enemy33" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1728, -120 )
+
+[node name="Enemy34" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1928, -24 )
+
+[node name="Enemy35" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1736, 0 )
+
+[node name="Enemy36" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1368, 0 )
+
+[node name="Enemy37" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 928, -8 )
+
+[node name="Enemy38" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 920, -208 )
+
+[node name="Enemy39" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1160, -200 )
+
+[node name="Enemy40" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1208, -152 )
+
+[node name="Enemy41" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1112, -64 )
+
+[node name="Enemy42" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 680, -40 )
+
+[node name="Enemy43" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 816, -72 )
+
+[node name="Enemy44" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1104, -128 )
+
+[node name="Enemy45" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1312, -176 )
+
+[node name="Enemy46" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1400, -128 )
+
+[node name="Enemy47" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1112, -64 )
+
+[node name="Enemy48" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 840, -56 )
+
+[node name="Enemy49" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 728, -24 )
+
+[node name="Enemy50" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 576, -8 )
+
+[node name="Enemy51" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 480, 0 )
+
+[node name="Enemy52" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 360, -88 )
+
+[node name="Enemy53" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 224, -48 )
+
+[node name="Enemy54" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 464, -32 )
+
+[node name="Enemy55" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 752, -120 )
+
+[node name="Enemy56" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1056, -144 )
+
+[node name="Enemy57" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1056, -144 )

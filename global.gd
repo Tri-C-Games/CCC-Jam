@@ -13,20 +13,19 @@ enum tiles {
 var commands_list = []
 var gamevars_list = []
 
-var next_upgrade_path_progression:int=0
+var upgrade_path = [["gravity", "player_jump_speed"], ["player_size"], ["player_health"], ["player_max_speed", "player_max_acc"], ["time_scale"]]
 
-var upgrade_path= [["gravity", "player_jump_speed"]]
-
-func upgrade(dialogue_box):
-	var popup_text= "Hey, I just remembered! Maybe you would find the vars [color=blue]"
-	for item in upgrade_path[next_upgrade_path_progression]:
+func upgrade(dialogue_box, path_number, display_dialogue = false):
+	for item in upgrade_path[path_number]:
 		get(item).writable=true
-		popup_text+= item+", "
 	
-	popup_text+="[color=black]useful."
-	popup_text+= "[color=red] Use the variables command to see what they are.[color=black]"
-	dialogue_box.buffer_dialogue(popup_text)
-	next_upgrade_path_progression+=1
+	if display_dialogue:
+		var text = "I have added some new variables that you can now use!"
+		dialogue_box.buffer_dialogue(text)
+
+func unlock_all_vars():
+	for gamevar in global.gamevars_list:
+		gamevar.writable = true
 
 class command:
 	var aliases
@@ -113,11 +112,13 @@ onready var restart_command = command.new(["restart", "redo", "reset"], "Complet
 #Game Vars
 onready var gravity = gamevar.new(-99999, 99999, ["gravity"], "1800", "Number",
 "The value of gravity")
+onready var time_scale = gamevar.new(null, null, ["time_scale", "time"], "1", "Number",
+"A multiplier for the rate of time")
 
 #Player Vars
 onready var player_fly = gamevar.new(null, null, ["player_fly", "fly"], "false", "True/False",
 "Whether or not the player can fly")
-onready var player_fly_speed = gamevar.new(-99999, 99999, ["player_fly_speed", "fly_speed"], "50", "Number",
+onready var player_fly_speed = gamevar.new(-99999, 99999, ["player_fly_speed", "fly_speed"], "900", "Number",
 "How fast the player flies")
 onready var player_max_speed = gamevar.new(-99999, 99999, ["player_max_speed", "player_speed", "speed"], "700", "Number",
 "The maximum speed at which the player can move")
@@ -127,10 +128,12 @@ onready var player_max_friction = gamevar.new(-99999, 99999, ["player_max_fricti
 "The maximum friction that can be applied to the player")
 onready var player_jump_speed = gamevar.new(-99999, 99999, ["player_jump_speed", "player_jump", "jump"], "900", "Number",
 "The speed (or force) applied to the player when jumping")
-onready var player_health = gamevar.new(-99999, 99999, ["player_health", "health", "hp"], "100", "Number",
+onready var player_health = gamevar.new(-99999, 99999, ["player_health", "health", "hp"], "1", "Number",
 "The health that the player has")
 onready var player_damage_bounce = gamevar.new(-99999, 99999, ["player_damage_bounce", "damage_bounce", "bounce", "enemy_bounce"], "500", "Number",
 "The amount of knockback the player receives when the player kills an enemy")
+onready var player_size = gamevar.new(null, null, ["player_size", "player_scale", "size", "scale"], "1", "Number",
+"A multiplier for how big the player is")
 
 #Enemy Vars
 onready var enemy_max_speed = gamevar.new(-99999, 99999, ["enemy_max_speed", "enemy_speed"], "150", "Number",
@@ -165,7 +168,8 @@ func complete_restart(go_to_menu = false):
 	else:
 		restart()
 
+var level = 1
 func go_to_next_level():
-	# TODO
-	if get_tree().change_scene("res://UI/End Screen/End Screen.tscn") != OK:
+	level += 1
+	if get_tree().change_scene("res://World/Levels/Level%s.tscn" % level) != OK:
 		print_debug("An error occurred while attempting to go to the next level.")

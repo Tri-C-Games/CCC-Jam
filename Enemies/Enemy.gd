@@ -9,11 +9,17 @@ onready var up_raycast = get_node("Up Raycast")
 var velocity = Vector2()  
 const RIGHT = 1
 const LEFT = -1
-var dir = RIGHT
+var dir = [RIGHT, LEFT][global.random_int(0, 2)]
+
+var dead = false
+
+func _ready():
+	raycast.position.x *= dir
 
 func _physics_process(delta):
-	movement(delta)
-	animate()
+	if not dead:
+		movement(delta)
+		animate()
 
 func movement(delta):
 	if is_on_floor():
@@ -23,8 +29,7 @@ func movement(delta):
 	velocity.y += global.gravity.real_value * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	var ray_cast_colliding = raycast.is_colliding()
-	if not ray_cast_colliding and is_on_floor():
+	if not raycast.is_colliding() and is_on_floor():
 		dir *= LEFT
 		raycast.position.x *= LEFT
 	
@@ -45,13 +50,17 @@ func animate():
 		anim_sprite.frames.set_animation_loop("Walk", false)
 
 func die():
+	$"Death SFX".play()
+	visible = false
+	dead = true
+	yield($"Death SFX", "finished")
 	queue_free()
 
 func _on_Die_Zone_body_entered(body):
-	if body.has_method("knockback"):
+	if body.has_method("knockback") and not dead:
 		body.knockback(global.player_damage_bounce.real_value, Vector2.UP)
 		die()
 
 func _on_Kill_Zone_body_entered(body):
-	if body.name == "Player":
-		body.die()
+	if body.name == "Player" and not dead:
+		body.hurt(1)
