@@ -108,6 +108,8 @@ onready var exit_command = command.new(["exit", "quit", "stop"], "Exit the devel
 "exit - What did you expect this to tell you? It just exits the menu.")
 onready var restart_command = command.new(["restart", "redo", "reset"], "Completely restart the game", 1,
 "restart - What did you expect this to tell you? It just restarts the game.")
+onready var goto_command = command.new(["goto", "go", "level"], "Goes to the level specified", 2,
+"goto [level number]")
 
 #Game Vars
 onready var gravity = gamevar.new(-99999, 99999, ["gravity"], "1800", "Number",
@@ -169,8 +171,19 @@ func complete_restart(go_to_menu = false):
 		restart()
 
 var level = 1
-func go_to_next_level():
+func go_to_next_level(reset_vars = false):
 	level += 1
-	global.gamevar.reset_gamevars()
+	if reset_vars:
+		global.gamevar.reset_gamevars()
 	if get_tree().change_scene("res://World/Levels/Level%s.tscn" % level) != OK:
 		print_debug("An error occurred while attempting to go to the next level.")
+
+func go_to_level(level_number):
+	var tree = get_tree()
+	tree.paused = false
+	if level_number == 1:
+		if get_tree().change_scene("res://World/Tutorial/Tutorial.tscn") != OK:
+			print_debug("An error occurred while attempting to change to the tutorial scene.")
+	else:
+		if get_tree().change_scene("res://World/Levels/Level%s.tscn" % level_number) != OK:
+			print_debug("An error occurred while attempting to change the level.")

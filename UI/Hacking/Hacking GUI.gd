@@ -85,6 +85,17 @@ func parse_command(text):
 			
 			output = output.trim_suffix("\n")
 			console.output_text(output, false)
+		"goto":
+			var level_number = separated_command[1]
+			if not level_number.is_valid_integer():
+				console.output_error(invalid_syntax_text)
+				return
+			
+			var num = int(level_number)
+			if not num in [1, 2, 3, 4, 5]:
+				console.output_error("That level does not exist!")
+				return
+			global.go_to_level(num)
 
 func exit():
 	emit_signal("exit_pressed")
